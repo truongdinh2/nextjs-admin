@@ -1,0 +1,83 @@
+{
+  "employees": [
+    {
+      "name": "truongdinh",
+      "email": "batman@B.COM",
+      "Age": 1,
+      "address": "fresher",
+      "chuc_vu": "ba dinh",
+      "id": 4
+    },
+    {
+      "name": "truongdinh",
+      "email": "ozawa@ozawa.com",
+      "Age": 3,
+      "address": "nhan vien",
+      "chuc_vu": "doi",
+      "id": 9
+    },
+    {
+      "name": "truong dinh",
+      "email": "supe@gmail.con",
+      "Age": 23,
+      "address": "fresher",
+      "chuc_vu": "12",
+      "id": 10
+    },
+    {
+      "name": "truong",
+      "email": "12323@sassaf.com",
+      "Age": 3,
+      "address": "dfd",
+      "chuc_vu": "df",
+      "id": 11
+    },
+    {
+      "name": "nguyen dinh truong11111111",
+      "email": "dinhtruong@gmail.com",
+      "Age": 23,
+      "address": "OJT",
+      "chuc_vu": "ba dinh",
+      "id": 12
+    }
+  ],
+  "office": [
+    {
+      "Floor": "tang 1",
+      "Status": true,
+      "Time_from": "10h",
+      "time_to": "12h",
+      "id": 1
+    },
+    {
+      "Floor": "tang 13",
+      "Status": "true",
+      "Time_from": "13h30",
+      "time_to": "16h30",
+      "id": 2
+    },
+    {
+      "Floor": "tang 13",
+      "Status": false,
+      "Time_from": "13h30",
+      "time_to": "2313",
+      "id": 3
+    },
+    {
+      "Floor": "tang 13",
+      "Status": true,
+      "Time_from": "13h30",
+      "time_to": "1111111",
+      "id": 4
+    }
+  ],
+  "Project": [
+    {
+      "Name": "tclearning",
+      "Date_begin": "2020-12-6",
+      "Time_expected": "20 days",
+      "NumberPepole": "20 people",
+      "id": 2
+    }
+  ]
+}

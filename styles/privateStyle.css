@@ -1,0 +1,8 @@
+:root {
+    --font-text: "Lucida Bright", "DejaVu Serif", Georgia, "serif";
+    --background-bar: linear-gradient(189deg, rgba(12, 124, 106, 1) 0%, rgba(86, 9, 121, 1) 61%);
+    --background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+    --background-dark-mode: linear-gradient(90deg, rgba(75, 7, 59, 1) 0%, rgba(44, 75, 93, 1) 100%);
+    --background-blue-light: #89CFF0;
+    --text-color-dark-title: #b3c5cd;
+}
