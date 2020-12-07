@@ -2,7 +2,7 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, message } from 'antd'
 import React, { useEffect, useState } from 'react'
 import Diolog from './diolog'
-export default function Table(props) {
+export default function Table() {
     const success = () => {
         message.success('deleted sucessfully');
     };
@@ -25,16 +25,15 @@ export default function Table(props) {
         setDataEdit(null);
         setIsUpData(!isUpData);
     }
-    const sortData = employeesData.sort(function (a, b) {
-        var x = a.name.toLowerCase();
-        var y = b.name.toLowerCase();
-        if (x < y) { return -1; }
-        if (x > y) { return 1; }
-        return 0;
-    });
+    // const sortData = employeesData.sort(function (a, b) {
+    //     var x = a.name.toLowerCase();
+    //     var y = b.name.toLowerCase();
+    //     if (x < y) { return -1; }
+    //     if (x > y) { return 1; }
+    //     return 0;
+    // });
     // console.log(sortDataa)
     const handleDelete = async id => {
-        console.log(id)
         fetch(`http://127.0.0.1:3000/employees/${id}`, {
             method: "DELETE",
             headers: {
@@ -42,7 +41,9 @@ export default function Table(props) {
             }
         }).then(() => { setIsUpData(!isUpData); success() })
     }
+    console.log(employeesData)
     employeesData.map((key) => {
+        console.log(key.name)
         var index;
         index = key.name.indexOf(valSearch);
         if (index !== -1) {
@@ -72,7 +73,9 @@ export default function Table(props) {
                 <thead>
                     <tr>
                         <th><h1>STT</h1></th>
-                        <th><h1 style={{ cursor: 'pointer' }} onClick={() => { setEmployeesData(sortData); alert('da sap xep') }}>Name</h1></th>
+                        <th><h1 
+                        // style={{ cursor: 'pointer' }} onClick={() => { setEmployeesData(sortData); alert('da sap xep') }}
+                        >Name</h1></th>
                         <th><h1>Email</h1></th>
                         <th><h1>Age</h1></th>
                         <th><h1>Address</h1></th>

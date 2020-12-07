@@ -61,7 +61,7 @@ export default function L({ Component, pageProps }) {
                         </Menu.Item>
                         <Menu.Item key="2">
                             <Link href="/data/office-m/table">
-                                Room manager
+                                Office manager
                             </Link>
 
                         </Menu.Item>

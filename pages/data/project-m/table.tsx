@@ -32,7 +32,7 @@ export default function Table() {
         return 0;
     });
     const handleDelete = async id => {
-        console.log(id)
+        // console.log(id)
         fetch(`http://127.0.0.1:3000/Project/${id}`, {
             method: "DELETE",
             headers: {
@@ -83,7 +83,7 @@ export default function Table() {
                 <tbody>
                     {arrKey.map((data, index) => {
                         return (
-                            <tr>
+                            <tr key={data.id}>
                                 <td>{index + 1}</td>
                                 <td>{data.Name}</td>
                                 <td>{data.Date_begin}</td>

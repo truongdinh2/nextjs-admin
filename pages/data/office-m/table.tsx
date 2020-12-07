@@ -27,7 +27,7 @@ export default function Table() {
         setIsUpData(!isUpData);
     }
     const handleDelete = async id => {
-        console.log(id)
+        // console.log(id)
         fetch(`http://127.0.0.1:3000/office/${id}`, {
             method: "DELETE",
             headers: {
@@ -43,7 +43,7 @@ export default function Table() {
         }
         return arrKey
     });
-    console.log(officeData)
+    // console.log(officeData)
     return (
         <div>
             <h1 className="title">Office manager </h1>
@@ -79,7 +79,7 @@ export default function Table() {
                 <tbody>
                     {arrKey.map((data, index) => {
                         return (
-                            <tr>
+                            <tr key={data.id}>
                                 <td>{index + 1}</td>
                                 <td>{data.Floor}</td>
                                 <td>{data.Status === true ? 'empty' : 'ordered'}</td>

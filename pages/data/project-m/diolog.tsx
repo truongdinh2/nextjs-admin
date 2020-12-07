@@ -26,10 +26,12 @@ const Diaolog = (props) => {
     form.setFieldsValue(
       checkEdit === true ? { user: dataEdit } : '');
 
+      console.log()
   });
   const onFinish = async values => {
+    console.log(values.user)
     if (!dataEdit) {
-      fetch("http://127.0.0.1:3000/employees", {
+      fetch("http://127.0.0.1:3000/Project", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,7 +43,7 @@ const Diaolog = (props) => {
         props.onChangeOpen()
       });
     } else {
-      fetch(`http://127.0.0.1:3000/employees/${dataEdit.id}`, {
+      fetch(`http://127.0.0.1:3000/Project/${dataEdit.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -61,32 +63,32 @@ const Diaolog = (props) => {
   const success = () => {
     message.success('done !');
   };
+  console.log(process.env)
   return (
-    <div className="diolog">
+    <div className="diologPro">
 
       <Form {...layout} name="nest-messages" onFinish={onFinish}
         validateMessages={validateMessages}
         form={form}>
         <Form.Item name={['user', 'Name']} label="Name" rules={[{ required: true }]}>
           <Input
-
           />
         </Form.Item>
+
         <Form.Item name={['user', 'Date_begin']} label="Date begin" rules={[
         { required: true }]}>
-          <Input />
+          <Input type="date"/>
         </Form.Item>
         <Form.Item name={['user', 'Time_expected']}
-          label="Time expected" rules={[{ type: 'number', min: 0, max: 99 }, { required: true }]}>
-          <InputNumber />
+          label="Time expected" rules={[ { required: true }]}>
+          <Input />
         </Form.Item>
         <Form.Item name={['user', 'NumberPepole']} label="Number pepole" 
-        rules={[{ type: 'number', min: 0, max: 99 }, { required: true }]}>
+        rules={[ { required: true }]}>
           <Input />
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
           <Button type="primary" htmlType="submit" className="btn"
-          // onClick={()=>{setUserEdits(null)}}
           >
             Submit
         </Button>

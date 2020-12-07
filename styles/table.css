@@ -56,7 +56,7 @@ h2 a {
 .container td {
     font-weight: normal;
     font-size: 1em;
-    -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+    box-shadow: 0 2px 2px -2px #0E1119;
     -moz-box-shadow: 0 2px 2px -2px #0E1119;
     box-shadow: 0 2px 2px -2px #0E1119;
 }
@@ -79,14 +79,12 @@ h2 a {
 }
 
 
-/* Background-color of the odd rows */
 
 .container tr:nth-child(odd) {
     background-color: #323C50;
 }
 
 
-/* Background-color of the even rows */
 
 .container tr:nth-child(even) {
     background-color: #2C3446;
@@ -154,9 +152,3 @@ h2 a {
     /* justify-content: center; */
 }
 
-@media (max-width: 800px) {
-    .container td:nth-child(4),
-    .container th:nth-child(4) {
-        display: none;
-    }
-}

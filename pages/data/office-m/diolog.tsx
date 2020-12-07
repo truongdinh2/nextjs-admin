@@ -81,13 +81,13 @@ const Diaolog = (props) => {
         <Form.Item name={['user', 'Time_from']}
           label="Time from"
           rules={[{ required: true }]}>
-          <Input />
+          <Input type="time"/>
         </Form.Item>
         <Form.Item name={['user', 'time_to']}
           label="Time to"
           rules={[{ required: true }]}
         >
-          <Input />
+          <Input type="time" />
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
           <Button type="primary" htmlType="submit" className="btn"
