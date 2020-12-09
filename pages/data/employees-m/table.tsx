@@ -14,7 +14,7 @@ export default function Table() {
     const [open, setOpen] = useState(false);
     const [employeesData, setEmployeesData] = useState([])
     useEffect(() => {
-        fetch('http://127.0.0.1:3000/employees')
+        fetch('http://10.1.16.159:3000/employees')
             .then(response => response.json())
             .then(data => setEmployeesData(data));
 
@@ -34,7 +34,7 @@ export default function Table() {
     // });
     // console.log(sortDataa)
     const handleDelete = async id => {
-        fetch(`http://127.0.0.1:3000/employees/${id}`, {
+        fetch(`http://10.1.16.159:3000/employees/${id}`, {
             method: "DELETE",
             headers: {
                 "content-type": "application/json"

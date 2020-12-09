@@ -29,7 +29,7 @@ const Diaolog = (props) => {
   });
   const onFinish = async values => {
     if (!dataEdit) {
-      fetch("http://127.0.0.1:3000/employees", {
+      fetch("http://10.1.16.159:3000/employees", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,7 +41,7 @@ const Diaolog = (props) => {
         props.onChangeOpen()
       });
     } else {
-      fetch(`http://127.0.0.1:3000/employees/${dataEdit.id}`, {
+      fetch(`http://10.1.16.159:3000/employees/${dataEdit.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"

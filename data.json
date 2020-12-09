@@ -39,29 +39,23 @@
       "address": "OJT",
       "chuc_vu": "ba dinh",
       "id": 12
+    },
+    {
+      "name": "aaaaaa",
+      "email": "messi@gmail.com",
+      "Age": 4,
+      "address": "aaaa",
+      "chuc_vu": "aaa",
+      "id": 13
     }
   ],
   "office": [
-    {
-      "Floor": "tang 1",
-      "Status": true,
-      "Time_from": "10h",
-      "time_to": "12h",
-      "id": 1
-    },
     {
       "Floor": "tang 13",
       "Status": "true",
       "Time_from": "13h30",
       "time_to": "16h30",
       "id": 2
-    },
-    {
-      "Floor": "tang 13",
-      "Status": false,
-      "Time_from": "13h30",
-      "time_to": "2313",
-      "id": 3
     },
     {
       "Floor": "tang 13",
@@ -83,6 +77,13 @@
       "Time_from": "13:03",
       "time_to": "15:30",
       "id": 7
+    },
+    {
+      "Floor": "tang 15",
+      "Status": true,
+      "Time_from": "13:12",
+      "time_to": "12:02",
+      "id": 8
     }
   ],
   "Project": [

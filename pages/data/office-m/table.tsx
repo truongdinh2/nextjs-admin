@@ -16,7 +16,7 @@ export default function Table() {
     const [officeData, setOfficeData] = useState([])
 
     useEffect(() => {
-        fetch('http://127.0.0.1:3000/office')
+        fetch('http://10.1.16.159:3000/office')
             .then(response => response.json())
             .then(data => setOfficeData(data));
 
@@ -28,7 +28,7 @@ export default function Table() {
     }
     const handleDelete = async id => {
         // console.log(id)
-        fetch(`http://127.0.0.1:3000/office/${id}`, {
+        fetch(`http://10.1.16.159:3000/office/${id}`, {
             method: "DELETE",
             headers: {
                 "content-type": "application/json"
