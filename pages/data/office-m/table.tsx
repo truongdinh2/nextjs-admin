@@ -16,7 +16,7 @@ export default function Table() {
     const [officeData, setOfficeData] = useState([])
 
     useEffect(() => {
-        fetch('http://10.1.16.159:3000/office')
+        fetch('https://5fbb65b4c09c200016d406f6.mockapi.io/office')
             .then(response => response.json())
             .then(data => setOfficeData(data));
 
@@ -28,7 +28,7 @@ export default function Table() {
     }
     const handleDelete = async id => {
         // console.log(id)
-        fetch(`http://10.1.16.159:3000/office/${id}`, {
+        fetch(`https://5fbb65b4c09c200016d406f6.mockapi.io/office/${id}`, {
             method: "DELETE",
             headers: {
                 "content-type": "application/json"
@@ -52,7 +52,7 @@ export default function Table() {
                     onChange={(e) => { setValSearch(e.target.value);console.log(valSearch) }}
                 />
                 <Button className="button__add"
-                    onClick={() => { setOpen(!open) }}
+                    onClick={() => { setOpen(!open), setCheckEdit(false) }}
                 >
                     Add
             </Button>

@@ -31,7 +31,7 @@ const Diaolog = (props) => {
   const onFinish = async values => {
     console.log(values.user)
     if (!dataEdit) {
-      fetch("http://10.1.16.159:3000/Project", {
+      fetch("https://5fbb65b4c09c200016d406f6.mockapi.io/Project", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const Diaolog = (props) => {
         props.onChangeOpen()
       });
     } else {
-      fetch(`http://10.1.16.159:3000/Project/${dataEdit.id}`, {
+      fetch(`https://5fbb65b4c09c200016d406f6.mockapi.io/Project/${dataEdit.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"

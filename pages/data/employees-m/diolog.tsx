@@ -22,14 +22,14 @@ const Diaolog = (props) => {
   const [dataEdit, setDataEdit] = useState(props.dataEdit);
   const [form] = Form.useForm();
   const checkEdit = props.checkEdit;
+  // const [checkEdit1 ,setChechEdit] = useState(checkEdit)
   useEffect(() => {
     form.setFieldsValue(
       checkEdit === true ? { user: dataEdit } : '');
-
   });
   const onFinish = async values => {
     if (!dataEdit) {
-      fetch("http://10.1.16.159:3000/employees", {
+      fetch("https://5fbb65b4c09c200016d406f6.mockapi.io/employees", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,8 +40,12 @@ const Diaolog = (props) => {
         success()
         props.onChangeOpen()
       });
-    } else {
-      fetch(`http://10.1.16.159:3000/employees/${dataEdit.id}`, {
+    } 
+
+
+    
+    else {
+      fetch(`https://5fbb65b4c09c200016d406f6.mockapi.io/employees/${dataEdit.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -87,7 +91,7 @@ const Diaolog = (props) => {
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
           <Button type="primary" htmlType="submit" className="btn"
-            // onClick={() => { setDataEdit(null) }}
+            // onClick={() => { setChechEdit(false) }}
           >
             Submit
         </Button>

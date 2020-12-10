@@ -14,7 +14,7 @@ export default function Table() {
     const [open, setOpen] = useState(false);
     const [employeesData, setEmployeesData] = useState([])
     useEffect(() => {
-        fetch('http://10.1.16.159:3000/employees')
+        fetch('https://5fbb65b4c09c200016d406f6.mockapi.io/employees')
             .then(response => response.json())
             .then(data => setEmployeesData(data));
 
@@ -34,7 +34,8 @@ export default function Table() {
     // });
     // console.log(sortDataa)
     const handleDelete = async id => {
-        fetch(`http://10.1.16.159:3000/employees/${id}`, {
+        console.log(id)
+        fetch(`https://5fbb65b4c09c200016d406f6.mockapi.io/employees/${id}`, {
             method: "DELETE",
             headers: {
                 "content-type": "application/json"
@@ -43,7 +44,7 @@ export default function Table() {
     }
     console.log(employeesData)
     employeesData.map((key) => {
-        console.log(key.name)
+        // console.log(key.name)
         var index;
         index = key.name.indexOf(valSearch);
         if (index !== -1) {
@@ -59,7 +60,7 @@ export default function Table() {
                     onChange={(e) => { setValSearch(e.target.value) }}
                 />
                 <Button className="button__add"
-                    onClick={() => { setOpen(!open) }}
+                    onClick={() => { setOpen(!open); setCheckEdit(false) } }
                 >
                     Add
             </Button>

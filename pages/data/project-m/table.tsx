@@ -14,7 +14,7 @@ export default function Table() {
     const [open, setOpen] = useState(false);
     const [ProjectData, setProjectData] = useState([])
     useEffect(() => {
-        fetch('http://10.1.16.159:3000/Project')
+        fetch('https://5fbb65b4c09c200016d406f6.mockapi.io/Project')
             .then(response => response.json())
             .then(data => setProjectData(data));
 
@@ -33,7 +33,7 @@ export default function Table() {
     });
     const handleDelete = async id => {
         // console.log(id)
-        fetch(`http://10.1.16.159:3000/Project/${id}`, {
+        fetch(`https://5fbb65b4c09c200016d406f6.mockapi.io/Project/${id}`, {
             method: "DELETE",
             headers: {
                 "content-type": "application/json"
@@ -56,7 +56,7 @@ export default function Table() {
                     onChange={(e) => { setValSearch(e.target.value) }}
                 />
                 <Button className="button__add"
-                    onClick={() => { setOpen(!open) }}
+                    onClick={() => { setOpen(!open); setCheckEdit(false) }}
                 >
                     Add
             </Button>
@@ -71,7 +71,7 @@ export default function Table() {
                     <tr>
                         <th><h1>STT</h1></th>
                         <th><h1 
-                        // style={{ cursor: 'pointer' }} onClick={() => { setProjectData(sortData); alert('da sap xep') }}
+                        style={{ cursor: 'pointer' }} onClick={() => { setProjectData(sortData); alert('da sap xep') }}
                         >Name</h1></th>
                         <th><h1>Date begin</h1></th>
                         <th><h1>Time expected</h1></th>
