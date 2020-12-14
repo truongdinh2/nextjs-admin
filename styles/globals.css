@@ -1,4 +1,5 @@
 @import "privateStyle.css";
+
 body {
     padding: 0;
     margin: 0;
@@ -31,6 +32,8 @@ header p:hover {
     z-index: 10;
     position: fixed;
     top: 76px;
+    background-color:var(--back-ground-bar);
+    color: white;
 }
 
 .modal {
@@ -43,7 +46,9 @@ header p:hover {
     height: 100%;
     width: 100%;
 }
-
+.navItem {
+    padding: 20px 30px;
+}
 td a:first-child {
     color: pink !important;
     font-size: 18px;
@@ -51,4 +56,16 @@ td a:first-child {
 
 .icon:hover a {
     color: red !important;
+}
+/* .switch{
+    background-color: coral;
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 1px 10px darkblue, 3px 2px 15px #555;
+    outline: none;
+} */
+.switch{
+    height: 100px;
+    width: 100px;
 }

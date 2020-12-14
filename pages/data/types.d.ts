@@ -1,0 +1,3 @@
+type Edit = {
+    id: string,
+  }

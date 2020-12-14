@@ -17,47 +17,74 @@ const validateMessages = {
     range: '${label} must be between ${min} and ${max}',
   },
 };
+interface Props {
+  dataEdit: Edit,
+  checkEdit: boolean,
+  onChangeOpen: any,
+  employeesData: any,
+  // email: any
+}
+const Diaolog = (props: Props) => {
+  // console.log(props)
 
-const Diaolog = (props) => {
   const [dataEdit, setDataEdit] = useState(props.dataEdit);
   const [form] = Form.useForm();
   const checkEdit = props.checkEdit;
+  const [employeeData, setEmployeeData] = useState(props.employeesData);
+  const arrayEmail = [];
+  employeeData.map(data => {
+    arrayEmail.push(data.email);
+    return arrayEmail;
+  })
+  console.log(arrayEmail)
+  // console.log(employeeData[1].email)
   // const [checkEdit1 ,setChechEdit] = useState(checkEdit)
   useEffect(() => {
     form.setFieldsValue(
       checkEdit === true ? { user: dataEdit } : '');
   });
-  const onFinish = async values => {
-    if (!dataEdit) {
-      fetch("https://5fbb65b4c09c200016d406f6.mockapi.io/employees", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values.user),
-      }).then(() => {
-        // props.checkData();
-        success()
-        props.onChangeOpen()
-      });
-    } 
-
-
-    
-    else {
-      fetch(`https://5fbb65b4c09c200016d406f6.mockapi.io/employees/${dataEdit.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(values.user),
+  // interface Values {
+  //   user : ar
+  // }
+  const onFinish = async (values) => {
+    // console.log(values.user.email)
+    var index = true;
+    arrayEmail.map(email => {
+      if (email.indexOf(values.user.email) !== -1) {
+        return index = false;
       }
-      ).then(() => {
-        // alert("hi")
-        props.onChangeOpen()
-        setDataEdit(null)
-        success();
-      })
+    })
+    if (index) {
+      if (!dataEdit) {
+        fetch("https://5fbb65b4c09c200016d406f6.mockapi.io/employees", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values.user),
+        }).then(() => {
+          // props.checkData();
+          success()
+          props.onChangeOpen()
+        });
+      }
+      else {
+        fetch(`https://5fbb65b4c09c200016d406f6.mockapi.io/employees/${dataEdit.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(values.user),
+        }
+        ).then(() => {
+          // alert("hi")
+          props.onChangeOpen()
+          setDataEdit(null)
+          success();
+        })
+      }
+    }else {
+      window.alert('email đã trùng lặp')
     }
     setDataEdit(null)
   };
@@ -65,7 +92,7 @@ const Diaolog = (props) => {
   const success = () => {
     message.success('done !');
   };
-  console.log(dataEdit,"hi")
+  // console.log(dataEdit,"hi")
   return (
     <div className="diolog">
 
@@ -83,7 +110,7 @@ const Diaolog = (props) => {
           label="Age" rules={[{ type: 'number', min: 0, max: 99 }, { required: true }]}>
           <InputNumber />
         </Form.Item>
-        <Form.Item name={['user', 'address']} label="chức vụ" rules={[{ required: true }]}>
+        <Form.Item name={['user', 'address']} label="position" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
         <Form.Item name={['user', 'chuc_vu']} label="address" rules={[{ required: true }]}>
@@ -91,7 +118,7 @@ const Diaolog = (props) => {
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
           <Button type="primary" htmlType="submit" className="btn"
-            // onClick={() => { setChechEdit(false) }}
+          // onClick={() => { setChechEdit(false) }}
           >
             Submit
         </Button>

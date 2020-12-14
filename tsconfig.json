@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "pages/data/employees-m/table.jsx"  ],
   "exclude": [
     "node_modules"
   ]

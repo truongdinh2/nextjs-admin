@@ -47,6 +47,9 @@
         left: 52em;
         width: 400px;
     }
+    .total{
+        width: 200px;
+    }
 }
 @media screen and (max-width: 1100px) {
     .diolog {

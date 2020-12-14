@@ -1,5 +1,5 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Button, message } from 'antd';
+import { Button, message, Popconfirm } from 'antd';
 import React, { useEffect, useState } from 'react'
 import Diolog from './diolog'
 export default function Table() {
@@ -12,7 +12,8 @@ export default function Table() {
     const [checkEdit, setCheckEdit] = useState(false);
     const [dataEdit, setDataEdit] = useState(null);
     const [open, setOpen] = useState(false);
-    const [ProjectData, setProjectData] = useState([])
+    const text = 'Are you sure to delete this task?';
+    const [ProjectData, setProjectData] = useState([]);
     useEffect(() => {
         fetch('https://5fbb65b4c09c200016d406f6.mockapi.io/Project')
             .then(response => response.json())
@@ -42,12 +43,15 @@ export default function Table() {
     }
     ProjectData.map((key) => {
         var index;
-        index = key.Name.indexOf(valSearch);
+        index = key.Name.toLowerCase().indexOf(valSearch);
         if (index !== -1) {
             arrKey.push(key)
         }
         return arrKey
     });
+    function confirm(id:number) {
+        handleDelete(id);
+    }
     return (
         <div>
             <h1 className="title">Project manager </h1>
@@ -70,8 +74,8 @@ export default function Table() {
                 <thead>
                     <tr>
                         <th><h1>STT</h1></th>
-                        <th><h1 
-                        style={{ cursor: 'pointer' }} onClick={() => { setProjectData(sortData); alert('da sap xep') }}
+                        <th><h1
+                            style={{ cursor: 'pointer' }} onClick={() => { setProjectData(sortData); alert('da sap xep') }}
                         >Name</h1></th>
                         <th><h1>Date begin</h1></th>
                         <th><h1>Time expected</h1></th>
@@ -97,9 +101,12 @@ export default function Table() {
                                     </a>
                                 </td>
                                 <td className="icon" >
-                                    <a onClick={() => { handleDelete(data.id) }}
+                                    <Popconfirm placement="topLeft" title={text} onConfirm={() => confirm(data.id)}
+                                        okText="Yes" cancelText="No"
+                                    ><a
                                         style={{ color: "red", textDecoration: "underLine", cursor: "pointer" }}>
-                                        <DeleteOutlined /></a>
+                                            <DeleteOutlined /></a>
+                                    </Popconfirm>
                                 </td>
                             </tr>
                         )

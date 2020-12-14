@@ -5,4 +5,23 @@
     --background-dark-mode: linear-gradient(90deg, rgba(75, 7, 59, 1) 0%, rgba(44, 75, 93, 1) 100%);
     --background-blue-light: #89CFF0;
     --text-color-dark-title: #b3c5cd;
+    --back-ground-bar: #46A049;
+    --text-color-td:#d2dfe6;
+    --background-td: #323C50;
+    --background-th: #1F2739;
+    --text-color-table:#A7A1AE;
+
+}
+[data-theme = "light"] {
+    --font-text: "Lucida Bright", "DejaVu Serif", Georgia, "serif";
+    --background-bar: linear-gradient(189deg, rgba(12, 124, 106, 1) 0%, rgba(86, 9, 121, 1) 61%);
+    --background-dark-mode:linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,208,255,1) 0%, rgba(66,198,195,1) 0%, rgba(202,223,230,1) 0%, rgba(181,214,222,1) 100%, rgba(182,214,230,1) 100%);
+    --background: linear-gradient(90deg, rgba(75, 7, 59, 1) 0%, rgba(44, 75, 93, 1) 100%);
+    --background-blue-light: #0b618a;
+    --text-color-dark-title: black;
+    --back-ground-bar: #46A049;
+    /* --background-td: #a9b9da; */
+    --background-th: #1F2739;
+    --text-color-table:white;
+    --text-color-td: darkblue;
 }

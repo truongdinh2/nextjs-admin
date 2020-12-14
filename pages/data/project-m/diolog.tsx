@@ -63,14 +63,14 @@ const Diaolog = (props) => {
   const success = () => {
     message.success('done !');
   };
-  console.log(process.env)
+  // console.log(process.env)
   return (
     <div className="diologPro">
 
       <Form {...layout} name="nest-messages" onFinish={onFinish}
         validateMessages={validateMessages}
         form={form}>
-        <Form.Item name={['user', 'Name']} label="Name" rules={[{ required: true }]}>
+        <Form.Item name={['user', 'Name']} extra label="Name" rules={[{ required: true }]}>
           <Input
           />
         </Form.Item>
@@ -85,7 +85,7 @@ const Diaolog = (props) => {
         </Form.Item>
         <Form.Item name={['user', 'NumberPepole']} label="Number pepole" 
         rules={[ { required: true }]}>
-          <Input />
+          <InputNumber />
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
           <Button type="primary" htmlType="submit" className="btn"

@@ -1,5 +1,5 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Button, message } from 'antd'
+import { Button, message, Popconfirm } from 'antd'
 import React, { useEffect, useState } from 'react'
 import Diolog from './diolog'
 export default function Table() {
@@ -12,7 +12,9 @@ export default function Table() {
     const [checkEdit, setCheckEdit] = useState(false);
     const [dataEdit, setDataEdit] = useState(null);
     const [open, setOpen] = useState(false);
-    const [employeesData, setEmployeesData] = useState([])
+    const [employeesData, setEmployeesData] =  React.useState([]);
+    const text = 'Are you sure to delete this task?';
+    // const checkEmail = arrKey.map(email => )
     useEffect(() => {
         fetch('https://5fbb65b4c09c200016d406f6.mockapi.io/employees')
             .then(response => response.json())
@@ -25,14 +27,6 @@ export default function Table() {
         setDataEdit(null);
         setIsUpData(!isUpData);
     }
-    // const sortData = employeesData.sort(function (a, b) {
-    //     var x = a.name.toLowerCase();
-    //     var y = b.name.toLowerCase();
-    //     if (x < y) { return -1; }
-    //     if (x > y) { return 1; }
-    //     return 0;
-    // });
-    // console.log(sortDataa)
     const handleDelete = async id => {
         console.log(id)
         fetch(`https://5fbb65b4c09c200016d406f6.mockapi.io/employees/${id}`, {
@@ -52,6 +46,20 @@ export default function Table() {
         }
         return arrKey
     });
+    function confirm(id) {
+        message.info('Clicked on Yes.');
+        handleDelete(id)
+      }
+    // console.log(arrKey)
+    // checkEmail (newEmail){
+    //     var result = true;
+    //     arrKey.map(){
+    //         if()
+    //     }
+
+
+    // }
+    console.log(employeesData)
     return (
         <div>
             <h1 className="title">Employees manager </h1>
@@ -60,7 +68,7 @@ export default function Table() {
                     onChange={(e) => { setValSearch(e.target.value) }}
                 />
                 <Button className="button__add"
-                    onClick={() => { setOpen(!open); setCheckEdit(false) } }
+                    onClick={() => { setOpen(!open); setCheckEdit(false) }}
                 >
                     Add
             </Button>
@@ -69,18 +77,19 @@ export default function Table() {
             {open && <div className="modal" onClick={() => setOpen(false)}></div>}
             {open && <Diolog dataEdit={dataEdit} checkEdit={checkEdit}
                 onChangeOpen={onChangeOpen}
+                employeesData = {employeesData}
             />}
             <table className="container">
                 <thead>
                     <tr>
                         <th><h1>STT</h1></th>
-                        <th><h1 
+                        <th><h1
                         // style={{ cursor: 'pointer' }} onClick={() => { setEmployeesData(sortData); alert('da sap xep') }}
                         >Name</h1></th>
                         <th><h1>Email</h1></th>
                         <th><h1>Age</h1></th>
                         <th><h1>Address</h1></th>
-                        <th><h1>chức vụ</h1></th>
+                        <th><h1>position</h1></th>
                         <th><h1>Edit</h1></th>
                         <th><h1>Detele</h1></th>
                     </tr>
@@ -97,15 +106,18 @@ export default function Table() {
                                 <td>{data.chuc_vu}</td>
                                 <td className="icon">
                                     <a style={{ color: "blue", textDecoration: "underLine", cursor: "pointer" }}
-                                        onClick={() => {setOpen(true); setDataEdit(data); setCheckEdit(true)}}
+                                        onClick={() => { setOpen(true); setDataEdit(data); setCheckEdit(true) }}
                                     >
                                         <EditOutlined />
                                     </a>
                                 </td>
                                 <td className="icon">
-                                    <a onClick={() => { handleDelete(data.id) }}
+                                    <Popconfirm placement="topLeft" title={text} onConfirm={() => confirm(data.id)}
+                                        okText="Yes" cancelText="No"
+                                    ><a 
                                         style={{ color: "red", textDecoration: "underLine", cursor: "pointer" }}>
-                                        <DeleteOutlined /></a>
+                                            <DeleteOutlined /></a>
+                                    </Popconfirm>
                                 </td>
                             </tr>
                         )

@@ -1,5 +1,5 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Button, message } from 'antd'
+import { Button, message, Popconfirm } from 'antd'
 import React, { useEffect, useState } from 'react'
 import Diaolog from './diolog';
 
@@ -12,8 +12,9 @@ export default function Table() {
     const [isUpData, setIsUpData] = useState(false);
     const [checkEdit, setCheckEdit] = useState(false);
     const [dataEdit, setDataEdit] = useState(null);
-    const [open, setOpen] = useState(false)
-    const [officeData, setOfficeData] = useState([])
+    const [open, setOpen] = useState(false);
+    const text = 'Are you sure to delete this task?';
+    const [officeData, setOfficeData] = useState([]);
 
     useEffect(() => {
         fetch('https://5fbb65b4c09c200016d406f6.mockapi.io/office')
@@ -43,13 +44,17 @@ export default function Table() {
         }
         return arrKey
     });
+    function confirm(id) {
+        message.info('Clicked on Yes.');
+        handleDelete(id)
+    }
     // console.log(officeData)
     return (
         <div>
             <h1 className="title">Office manager </h1>
             <div className="button">
                 <input type="search" placeholder="search" className="search"
-                    onChange={(e) => { setValSearch(e.target.value);console.log(valSearch) }}
+                    onChange={(e) => { setValSearch(e.target.value); console.log(valSearch) }}
                 />
                 <Button className="button__add"
                     onClick={() => { setOpen(!open), setCheckEdit(false) }}
@@ -68,7 +73,7 @@ export default function Table() {
                         <th><h1>STT</h1></th>
                         <th><h1
                         //  style={{ cursor: 'pointer' }} onClick={() => { setOfficeData(sortData); alert('da sap xep') }}
-                         >Floor</h1></th>
+                        >Floor</h1></th>
                         <th><h1>Status</h1></th>
                         <th><h1>Time from</h1></th>
                         <th><h1>Time to</h1></th>
@@ -93,9 +98,12 @@ export default function Table() {
                                     </a>
                                 </td>
                                 <td className="icon">
-                                    <a onClick={() => { handleDelete(data.id) }}
+                                    <Popconfirm placement="topLeft" title={text} onConfirm={() => confirm(data.id)}
+                                        okText="Yes" cancelText="No"
+                                    ><a
                                         style={{ color: "red", textDecoration: "underLine", cursor: "pointer" }}>
-                                        <DeleteOutlined /></a>
+                                            <DeleteOutlined /></a>
+                                    </Popconfirm>
                                 </td>
                             </tr>
                         )

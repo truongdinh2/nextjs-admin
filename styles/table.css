@@ -5,7 +5,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     line-height: 1.42em;
-    color: #A7A1AE;
+    color: var(--text-color-table);
     background-image: var(--background-dark-mode);
 }
 
@@ -14,7 +14,7 @@ h1 {
     font-weight: 300;
     line-height: 1em;
     text-align: center;
-    color: #4DC3FA;
+    color:var(--background-blue-light);
 }
 
 .title {
@@ -39,7 +39,7 @@ h2 a {
 }
 
 .blue {
-    color: #d2dfe6;
+    color: var(--text-color-td);
 }
 
 .yellow {
@@ -56,8 +56,6 @@ h2 a {
 .container td {
     font-weight: normal;
     font-size: 1em;
-    box-shadow: 0 2px 2px -2px #0E1119;
-    -moz-box-shadow: 0 2px 2px -2px #0E1119;
     box-shadow: 0 2px 2px -2px #0E1119;
 }
 
@@ -87,11 +85,11 @@ h2 a {
 
 
 .container tr:nth-child(even) {
-    background-color: #2C3446;
+    background-color: var(--background-td);
 }
 
 .container th {
-    background-color: #1F2739;
+    background-color:var(--background-th);
 }
 
 .container td:first-child {
