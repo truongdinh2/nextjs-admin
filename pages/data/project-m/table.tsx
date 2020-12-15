@@ -1,8 +1,9 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, message, Popconfirm } from 'antd';
 import React, { useEffect, useState } from 'react'
+import Layout from '../../layout';
 import Diolog from './diolog'
-export default function Table() {
+export default function Table({employees}) {
     const success = () => {
         message.success('deleted sucessfully');
     };
@@ -13,17 +14,18 @@ export default function Table() {
     const [dataEdit, setDataEdit] = useState(null);
     const [open, setOpen] = useState(false);
     const text = 'Are you sure to delete this task?';
-    const [ProjectData, setProjectData] = useState([]);
-    useEffect(() => {
-        fetch('https://5fbb65b4c09c200016d406f6.mockapi.io/Project')
-            .then(response => response.json())
-            .then(data => setProjectData(data));
-
-    }, [isUpData])
+    const [ProjectData, setProjectData] = useState(employees);
+    const link = process.env.PROJECT;
+    const upDate = async () => {
+        const reload = await fetch(link)
+        const employees = await reload.json();
+        setProjectData(employees);
+    }
     const onChangeOpen = () => {
         setOpen(false)
         setDataEdit(null);
         setIsUpData(!isUpData);
+        upDate();
     }
     const sortData = ProjectData.sort(function (a, b) {
         var x = a.Name.toLowerCase();
@@ -34,12 +36,16 @@ export default function Table() {
     });
     const handleDelete = async id => {
         // console.log(id)
-        fetch(`https://5fbb65b4c09c200016d406f6.mockapi.io/Project/${id}`, {
+        fetch(` ${link}/${id}`, {
             method: "DELETE",
             headers: {
                 "content-type": "application/json"
             }
-        }).then(() => { setIsUpData(!isUpData); success() })
+        }).then(() => { 
+            setIsUpData(!isUpData); 
+            success() ;
+            upDate();
+        })
     }
     ProjectData.map((key) => {
         var index;
@@ -53,7 +59,7 @@ export default function Table() {
         handleDelete(id);
     }
     return (
-        <div>
+        <Layout title="project manager">
             <h1 className="title">Project manager </h1>
             <div className="button">
                 <input type="search" placeholder="search" className="search"
@@ -114,6 +120,16 @@ export default function Table() {
                 </tbody>
             </table>
             <div style={{ height: '80px', }}></div>
-        </div>
+        </Layout>
     )
 }
+export const getStaticProps = async () => {
+    const link = process.env.PROJECT;
+    const res = await fetch(link)
+    const employees = await res.json();
+    return {
+        props: {
+            employees,
+        },
+    };
+};

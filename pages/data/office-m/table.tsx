@@ -1,9 +1,11 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, message, Popconfirm } from 'antd'
 import React, { useEffect, useState } from 'react'
+import Layout from '../../layout';
 import Diaolog from './diolog';
 
-export default function Table() {
+
+export default function Table({ employees }) {
     const success = () => {
         message.success('deleted sucessfully');
     };
@@ -14,43 +16,51 @@ export default function Table() {
     const [dataEdit, setDataEdit] = useState(null);
     const [open, setOpen] = useState(false);
     const text = 'Are you sure to delete this task?';
-    const [officeData, setOfficeData] = useState([]);
+    const [officeData, setOfficeData] = useState(employees);
+    const link = process.env.FLOOR;
 
-    useEffect(() => {
-        fetch('https://5fbb65b4c09c200016d406f6.mockapi.io/office')
-            .then(response => response.json())
-            .then(data => setOfficeData(data));
 
-    }, [isUpData])
+    const upDate = async () => {
+        const reload = await fetch(link)
+        const employees = await reload.json();
+        setOfficeData(employees);
+
+    }
+
     const onChangeOpen = () => {
         setOpen(false)
         setDataEdit(null);
         setIsUpData(!isUpData);
+        upDate();
     }
-    const handleDelete = async id => {
-        // console.log(id)
-        fetch(`https://5fbb65b4c09c200016d406f6.mockapi.io/office/${id}`, {
+    const handleDelete = async (id: number) => {
+        fetch(`${link}/${id}`, {
             method: "DELETE",
             headers: {
                 "content-type": "application/json"
             }
-        }).then(() => { setIsUpData(!isUpData); success() })
+        }).then(() => {
+            upDate()
+            setIsUpData(!isUpData);
+            success();
+        })
     }
     officeData.map((key) => {
-        var index;
+        var index: number;
         index = key.Floor.indexOf(valSearch);
         if (index !== -1) {
             arrKey.push(key)
         }
         return arrKey
     });
-    function confirm(id) {
+    function confirm(id: number) {
         message.info('Clicked on Yes.');
         handleDelete(id)
     }
-    // console.log(officeData)
+    console.log(employees)
+    // console.log(link)
     return (
-        <div>
+        <Layout title="office-manager">
             <h1 className="title">Office manager </h1>
             <div className="button">
                 <input type="search" placeholder="search" className="search"
@@ -111,6 +121,16 @@ export default function Table() {
                 </tbody>
             </table>
             <div style={{ height: '80px', }}></div>
-        </div>
+        </Layout>
     )
 }
+export const getStaticProps = async () => {
+    const link = process.env.FLOOR;
+    const res = await fetch(link)
+    const employees = await res.json();
+    return {
+        props: {
+            employees,
+        },
+    };
+};

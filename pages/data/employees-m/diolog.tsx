@@ -1,6 +1,7 @@
 
 import { Form, Input, InputNumber, Button, message } from 'antd';
 import { useEffect, useState } from 'react';
+// import { inflate } from 'zlib';
 
 const layout = {
   labelCol: { span: 8 },
@@ -24,19 +25,38 @@ interface Props {
   employeesData: any,
   // email: any
 }
-const Diaolog = (props: Props) => {
+interface Values {
+user: object,
+email: string,
+}
+interface DataEdit {
+  id: number
+
+}
+interface Data {
+  email: string,
+  id: number
+}
+const Diaolog: React.FC<Props> = (props) => {
   // console.log(props)
 
-  const [dataEdit, setDataEdit] = useState(props.dataEdit);
+  const [dataEdit, setDataEdit] = useState<DataEdit>(props.dataEdit);
   const [form] = Form.useForm();
   const checkEdit = props.checkEdit;
   const [employeeData, setEmployeeData] = useState(props.employeesData);
   const arrayEmail = [];
-  employeeData.map(data => {
+  const idEdit : any= dataEdit ? dataEdit.id : '';
+  employeeData.map((data : Data,index: number) => {
+    var ind : number;
+    if(idEdit === data.id) {
+      ind = index
+    }
     arrayEmail.push(data.email);
+    arrayEmail[ind] = '';
     return arrayEmail;
   })
   console.log(arrayEmail)
+  console.log(checkEdit)
   // console.log(employeeData[1].email)
   // const [checkEdit1 ,setChechEdit] = useState(checkEdit)
   useEffect(() => {
@@ -46,29 +66,37 @@ const Diaolog = (props: Props) => {
   // interface Values {
   //   user : ar
   // }
-  const onFinish = async (values) => {
+  const onFinish = async (values ) => {
     // console.log(values.user.email)
     var index = true;
+    // if(idEdit) {
+    //   arrayEmail.
+    // }
     arrayEmail.map(email => {
       if (email.indexOf(values.user.email) !== -1) {
         return index = false;
       }
     })
+    // var index1 : boolean = true;
+
     if (index) {
-      if (!dataEdit) {
+      if (!dataEdit ) {
         fetch("https://5fbb65b4c09c200016d406f6.mockapi.io/employees", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(values.user),
-        }).then(() => {
+        }).then( async () => {
           // props.checkData();
+          // const reload = await fetch('https://5fbb65b4c09c200016d406f6.mockapi.io/employees')
+          // const employees = await reload.json();
+          // props.employees();
           success()
           props.onChangeOpen()
         });
       }
-      else {
+      else if (dataEdit ) {
         fetch(`https://5fbb65b4c09c200016d406f6.mockapi.io/employees/${dataEdit.id}`, {
           method: "PUT",
           headers: {
@@ -83,10 +111,10 @@ const Diaolog = (props: Props) => {
           success();
         })
       }
-    }else {
+    } else {
       window.alert('email đã trùng lặp')
     }
-    setDataEdit(null)
+    // setDataEdit(null)
   };
 
   const success = () => {

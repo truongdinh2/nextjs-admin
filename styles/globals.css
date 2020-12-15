@@ -69,3 +69,12 @@ td a:first-child {
     height: 100px;
     width: 100px;
 }
+.container {
+    height: 95vh;
+}
+.footer {
+    background-color: #333333;
+    height: 40px;
+    color: white;
+    padding-top: 10px;
+}

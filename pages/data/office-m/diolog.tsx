@@ -22,6 +22,7 @@ const Diaolog = (props) => {
   const [dataEdit, setDataEdit] = useState(props.dataEdit);
   const [form] = Form.useForm();
   const checkEdit = props.checkEdit;
+  const link = process.env.FLOOR;
   useEffect(() => {
     form.setFieldsValue(
       checkEdit === true ? { user: dataEdit } : '');
@@ -29,7 +30,7 @@ const Diaolog = (props) => {
   });
   const onFinish = async values => {
     if (!dataEdit) {
-      fetch("https://5fbb65b4c09c200016d406f6.mockapi.io/office", {
+      fetch(link, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,7 +42,7 @@ const Diaolog = (props) => {
         props.onChangeOpen()
       });
     } else {
-      fetch(`https://5fbb65b4c09c200016d406f6.mockapi.io/office/${dataEdit.id}`, {
+      fetch(`${link}/${dataEdit.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"

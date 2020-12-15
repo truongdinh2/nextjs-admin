@@ -1,8 +1,9 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, message, Popconfirm } from 'antd'
 import React, { useEffect, useState } from 'react'
+import Layout from '../../layout';
 import Diolog from './diolog'
-export default function Table() {
+export default function Table({ employees }) {
     const success = () => {
         message.success('deleted sucessfully');
     };
@@ -12,29 +13,36 @@ export default function Table() {
     const [checkEdit, setCheckEdit] = useState(false);
     const [dataEdit, setDataEdit] = useState(null);
     const [open, setOpen] = useState(false);
-    const [employeesData, setEmployeesData] =  React.useState([]);
+    const [employeesData, setEmployeesData] = React.useState(employees);
     const text = 'Are you sure to delete this task?';
+    const link = process.env.NAME;
+    // const [idEdit, setIdEdit] = useState(null)
     // const checkEmail = arrKey.map(email => )
-    useEffect(() => {
-        fetch('https://5fbb65b4c09c200016d406f6.mockapi.io/employees')
-            .then(response => response.json())
-            .then(data => setEmployeesData(data));
+    const upDate = async () => {
+        const reload = await fetch(link)
+        const employees = await reload.json();
+        setEmployeesData(employees);
 
-    }, [isUpData])
-    // console.log(employeesData)
+    }
     const onChangeOpen = () => {
         setOpen(false)
         setDataEdit(null);
         setIsUpData(!isUpData);
+        upDate();
     }
+    console.log(process.env.NAME)
     const handleDelete = async id => {
-        console.log(id)
-        fetch(`https://5fbb65b4c09c200016d406f6.mockapi.io/employees/${id}`, {
+        // console.log(id)
+        fetch(`${link}/${id}`, {
             method: "DELETE",
             headers: {
                 "content-type": "application/json"
             }
-        }).then(() => { setIsUpData(!isUpData); success() })
+        }).then(() => {
+            upDate()
+            setIsUpData(!isUpData);
+            success();
+        })
     }
     console.log(employeesData)
     employeesData.map((key) => {
@@ -49,7 +57,7 @@ export default function Table() {
     function confirm(id) {
         message.info('Clicked on Yes.');
         handleDelete(id)
-      }
+    }
     // console.log(arrKey)
     // checkEmail (newEmail){
     //     var result = true;
@@ -59,9 +67,9 @@ export default function Table() {
 
 
     // }
-    console.log(employeesData)
+    console.log(employees)
     return (
-        <div>
+        <Layout title="employees manager">
             <h1 className="title">Employees manager </h1>
             <div className="button">
                 <input type="search" placeholder="search" className="search"
@@ -77,7 +85,7 @@ export default function Table() {
             {open && <div className="modal" onClick={() => setOpen(false)}></div>}
             {open && <Diolog dataEdit={dataEdit} checkEdit={checkEdit}
                 onChangeOpen={onChangeOpen}
-                employeesData = {employeesData}
+                employeesData={employeesData}
             />}
             <table className="container">
                 <thead>
@@ -106,7 +114,12 @@ export default function Table() {
                                 <td>{data.chuc_vu}</td>
                                 <td className="icon">
                                     <a style={{ color: "blue", textDecoration: "underLine", cursor: "pointer" }}
-                                        onClick={() => { setOpen(true); setDataEdit(data); setCheckEdit(true) }}
+                                        onClick={() => {
+                                            setOpen(true);
+                                            setDataEdit(data);
+                                            setCheckEdit(true);
+                                            // setIdEdit(data.id)
+                                        }}
                                     >
                                         <EditOutlined />
                                     </a>
@@ -114,7 +127,7 @@ export default function Table() {
                                 <td className="icon">
                                     <Popconfirm placement="topLeft" title={text} onConfirm={() => confirm(data.id)}
                                         okText="Yes" cancelText="No"
-                                    ><a 
+                                    ><a
                                         style={{ color: "red", textDecoration: "underLine", cursor: "pointer" }}>
                                             <DeleteOutlined /></a>
                                     </Popconfirm>
@@ -126,6 +139,16 @@ export default function Table() {
                 </tbody>
             </table>
             <div style={{ height: '80px', }}></div>
-        </div>
+        </Layout>
     )
 }
+export const getStaticProps = async () => {
+    const link = process.env.NAME;
+    const res = await fetch(link)
+    const employees = await res.json();
+    return {
+        props: {
+            employees,
+        },
+    };
+};
