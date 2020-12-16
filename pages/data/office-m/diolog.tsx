@@ -1,6 +1,6 @@
 
-import { Form, Input, InputNumber, Button, message, Radio } from 'antd';
-import { useEffect, useState } from 'react';
+import { Button, Form, Input, message, Radio } from 'antd';
+import { useEffect } from 'react';
 
 const layout = {
   labelCol: { span: 8 },
@@ -18,7 +18,7 @@ const validateMessages = {
   },
 };
 
-const Diaolog = (props) => {
+const Diaolog = (props: any) => {
   // const [dataEdit, setDataEdit] = useState(props.dataEdit);
   const dataEdit = props.dataEdit;
   const [form] = Form.useForm();
@@ -55,7 +55,7 @@ const Diaolog = (props) => {
         success();
       })
     }
-    setDataEdit(null)
+    // setDataEdit(null)
   };
 
   const success = () => {

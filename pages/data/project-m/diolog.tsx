@@ -18,17 +18,17 @@ const validateMessages = {
   },
 };
 
-const Diaolog = (props : any) => {
-  const [dataEdit, setDataEdit] = useState(props.dataEdit);
+const Diaolog = (props: any) => {
+  const dataEdit = props.dataEdit;
   const [form] = Form.useForm();
   const checkEdit = props.checkEdit;
   useEffect(() => {
     form.setFieldsValue(
       checkEdit === true ? { user: dataEdit } : '');
 
-      console.log()
+    console.log()
   });
-  const onFinish = async (values : any) => {
+  const onFinish = async (values: any) => {
     console.log(values.user)
     if (!dataEdit) {
       fetch("https://5fbb65b4c09c200016d406f6.mockapi.io/Project", {
@@ -38,7 +38,6 @@ const Diaolog = (props : any) => {
         },
         body: JSON.stringify(values.user),
       }).then(() => {
-        // props.checkData();
         success()
         props.onChangeOpen()
       });
@@ -51,19 +50,15 @@ const Diaolog = (props : any) => {
         body: JSON.stringify(values.user),
       }
       ).then(() => {
-        // alert("hi")
         props.onChangeOpen()
-        // setDataEdit(null)
         success();
       })
     }
-    // setDataEdit(null)
   };
 
   const success = () => {
     message.success('done !');
   };
-  // console.log(process.env)
   return (
     <div className="diologPro">
 
@@ -76,15 +71,15 @@ const Diaolog = (props : any) => {
         </Form.Item>
 
         <Form.Item name={['user', 'Date_begin']} label="Date begin" rules={[
-        { required: true }]}>
-          <Input type="date"/>
+          { required: true }]}>
+          <Input type="date" />
         </Form.Item>
         <Form.Item name={['user', 'Time_expected']}
-          label="Time expected" rules={[ { required: true }]}>
+          label="Time expected" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item name={['user', 'NumberPepole']} label="Number pepole" 
-        rules={[ { required: true }]}>
+        <Form.Item name={['user', 'NumberPepole']} label="Number pepole"
+          rules={[{ required: true }]}>
           <InputNumber />
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
