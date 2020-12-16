@@ -48,7 +48,7 @@ export default function Table({ employees }) {
     employeesData.map((key) => {
         // console.log(key.name)
         var index;
-        index = key.name.indexOf(valSearch);
+        index = key.name.toLowerCase().indexOf(valSearch);
         if (index !== -1) {
             arrKey.push(key)
         }
