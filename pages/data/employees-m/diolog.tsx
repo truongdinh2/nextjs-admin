@@ -37,40 +37,38 @@ interface Data {
   id: number
 }
 const Diaolog: React.FC<Props> = (props) => {
-  // console.log(props)
-
   const dataEdit : DataEdit = props.dataEdit
   const [form] = Form.useForm();
   const checkEdit = props.checkEdit;
   const [employeeData, setEmployeeData] = useState(props.employeesData);
   const arrayEmail = [];
-  const idEdit: any = dataEdit ? dataEdit.id : '';
-  employeeData.map((data: Data, index: number) => {
-    var ind: number;
-    if (idEdit === data.id) {
-      ind = index;
-      arrayEmail.push(data.email);
-      arrayEmail[ind] = 'abcbccb';
-    } else {
-      arrayEmail.push(data.email);
-    }
-    console.log(arrayEmail)
-    return arrayEmail;
-  })
+  // const idEdit: any = dataEdit ? dataEdit.id : '';
+  // employeeData.map((data: Data, index: number) => {
+  //   var ind: number;
+  //   if (idEdit === data.id) {
+  //     ind = index;
+  //     arrayEmail.push(data.email);
+  //     arrayEmail[ind] = 'abcbccb';
+  //   } else {
+  //     arrayEmail.push(data.email);
+  //   }
+  //   console.log(arrayEmail)
+  //   return arrayEmail;
+  // })
   useEffect(() => {
     // setDataEdit()
     form.setFieldsValue(
       checkEdit === true ? { user: dataEdit } : '');
   });
   const onFinish = async (values) => {
-    var index = true;
-    arrayEmail.map(email => {
-      if (email.indexOf(values.user.email) !== -1) {
-        return index = false;
-      }
-    })
+    // var index = true;
+    // arrayEmail.map(email => {
+    //   if (email.indexOf(values.user.email) !== -1) {
+    //     return index = false;
+    //   }
+    // })
 
-    if (index) {
+    // if (index) {
       if (!dataEdit) {
         fetch("https://5fbb65b4c09c200016d406f6.mockapi.io/employees", {
           method: "POST",
@@ -97,9 +95,9 @@ const Diaolog: React.FC<Props> = (props) => {
           success();
         })
       }
-    } else {
-      window.alert('email đã trùng lặp')
-    }
+  //   } else {
+  //     window.alert('email đã trùng lặp')
+  //   }
   };
 
   const success = () => {
