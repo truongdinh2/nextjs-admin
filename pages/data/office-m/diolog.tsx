@@ -37,7 +37,6 @@ const Diaolog = (props) => {
         },
         body: JSON.stringify(values.user),
       }).then(() => {
-        // props.checkData();
         success()
         props.onChangeOpen()
       });
@@ -50,7 +49,6 @@ const Diaolog = (props) => {
         body: JSON.stringify(values.user),
       }
       ).then(() => {
-        // alert("hi")
         props.onChangeOpen()
         setDataEdit(null)
         success();

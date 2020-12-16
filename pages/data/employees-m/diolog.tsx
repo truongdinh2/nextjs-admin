@@ -18,7 +18,7 @@ const validateMessages = {
   },
 };
 interface Props {
-  dataEdit: Edit,
+  dataEdit: any,
   checkEdit: boolean,
   onChangeOpen: any,
   employeesData: any,

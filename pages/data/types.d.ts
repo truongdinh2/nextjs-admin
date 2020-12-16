@@ -1,3 +1,0 @@
-type Edit = {
-    id: number,
-  }

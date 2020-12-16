@@ -16,8 +16,6 @@ export default function Table({ employees }) {
     const [employeesData, setEmployeesData] = React.useState(employees);
     const text = 'Are you sure to delete this task?';
     const link = process.env.NAME;
-    // const [idEdit, setIdEdit] = useState(null)
-    // const checkEmail = arrKey.map(email => )
     const upDate = async () => {
         const reload = await fetch(link)
         const employees = await reload.json();
@@ -30,7 +28,6 @@ export default function Table({ employees }) {
         setIsUpData(!isUpData);
         upDate();
     }
-    console.log(process.env.NAME)
     const handleDelete = async id => {
         // console.log(id)
         fetch(`${link}/${id}`, {
@@ -44,9 +41,7 @@ export default function Table({ employees }) {
             success();
         })
     }
-    console.log(employeesData)
     employeesData.map((key) => {
-        // console.log(key.name)
         var index;
         index = key.name.toLowerCase().indexOf(valSearch);
         if (index !== -1) {
@@ -58,15 +53,7 @@ export default function Table({ employees }) {
         message.info('Clicked on Yes.');
         handleDelete(id)
     }
-    // console.log(arrKey)
-    // checkEmail (newEmail){
-    //     var result = true;
-    //     arrKey.map(){
-    //         if()
-    //     }
 
-
-    // }
     console.log(employees)
     return (
         <Layout title="employees manager">
