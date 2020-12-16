@@ -5,7 +5,20 @@ import Layout from '../../layout';
 import Diaolog from './diolog';
 
 
-export default function Table({ employees }) {
+interface Props {
+    title: string,
+    employees: [
+        { Floor: string, }
+    ],
+    isUpData: boolean,
+    checkEdit: boolean,
+    open: boolean,
+    text: string,
+    link: string,
+    onChangeOpen: () => void,
+}
+
+const Table: React.FC<Props> = ({ employees }) => {
     const success = () => {
         message.success('deleted sucessfully');
     };
@@ -13,7 +26,7 @@ export default function Table({ employees }) {
     const [valSearch, setValSearch] = useState('');
     const [isUpData, setIsUpData] = useState(false);
     const [checkEdit, setCheckEdit] = useState(false);
-    const [dataEdit, setDataEdit] = useState(null);
+    const [dataEdit, setDataEdit] = useState<object>(null);
     const [open, setOpen] = useState(false);
     const text = 'Are you sure to delete this task?';
     const [officeData, setOfficeData] = useState(employees);
@@ -73,7 +86,9 @@ export default function Table({ employees }) {
 
             </div>
             {open && <div className="modal" onClick={() => setOpen(false)}></div>}
-            {open && <Diaolog dataEdit={dataEdit} checkEdit={checkEdit}
+            {open && <Diaolog
+                dataEdit={dataEdit} 
+                checkEdit={checkEdit}
                 onChangeOpen={onChangeOpen}
             />}
             <table className="container">
@@ -133,3 +148,4 @@ export const getStaticProps = async () => {
         },
     };
 };
+export default Table;

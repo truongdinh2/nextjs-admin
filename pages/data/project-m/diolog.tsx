@@ -18,7 +18,23 @@ const validateMessages = {
   },
 };
 
-const Diaolog = (props: any) => {
+interface Props {
+  title: string,
+  employees: [
+      {name: string,}
+  ],
+  checkEdit: boolean,
+  dataEdit: {
+    id: number,
+  },
+  onChangeOpen : () => void,
+}
+// interface Val{
+//  user: {
+//   //  id: number
+//  }, 
+// }
+const Diaolog: React.FC<Props> = (props) => {
   const dataEdit = props.dataEdit;
   const [form] = Form.useForm();
   const checkEdit = props.checkEdit;

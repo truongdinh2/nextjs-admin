@@ -18,10 +18,12 @@ const validateMessages = {
   },
 };
 interface Props {
-  dataEdit: any,
+  dataEdit: {
+    id: number
+  },
   checkEdit: boolean,
   onChangeOpen: any,
-  employeesData: any,
+  employeesData: {},
   // email: any
 }
 interface Values {

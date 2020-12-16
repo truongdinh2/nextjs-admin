@@ -17,8 +17,23 @@ const validateMessages = {
     range: '${label} must be between ${min} and ${max}',
   },
 };
-
-const Diaolog = (props: any) => {
+interface Props {
+  title: string,
+  employees: [
+      {name: string,}
+  ],
+  checkEdit: boolean,
+  dataEdit: {
+    id: number,
+  },
+  onChangeOpen : () => void,
+}
+interface Val{
+ user: {
+  //  id: number
+ }, 
+}
+const Diaolog = (props: Props) => {
   // const [dataEdit, setDataEdit] = useState(props.dataEdit);
   const dataEdit = props.dataEdit;
   const [form] = Form.useForm();
@@ -29,7 +44,7 @@ const Diaolog = (props: any) => {
       checkEdit === true ? { user: dataEdit } : '');
 
   });
-  const onFinish = async values => {
+  const onFinish = async (values: Val) => {
     if (!dataEdit) {
       fetch(link, {
         method: "POST",

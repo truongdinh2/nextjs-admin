@@ -1,9 +1,24 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Button, message, Popconfirm } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { Button, message, Popconfirm } from 'antd';
+import React, { useState } from 'react';
 import Layout from '../../layout';
-import Diolog from './diolog'
-export default function Table({ employees }) {
+import Diolog from './diolog';
+
+
+interface Props {
+    title: string,
+    employees: [
+        {name: string,}
+    ],
+    isUpData: boolean,
+    checkEdit: boolean,
+    dataEdit: {},
+    open: boolean,
+    text: string,
+    link: string,
+    onChangeOpen : () => void,
+}
+const Table : React.FC<Props> = ({ employees }) => {
     const success = () => {
         message.success('deleted sucessfully');
     };
@@ -28,7 +43,7 @@ export default function Table({ employees }) {
         setIsUpData(!isUpData);
         upDate();
     }
-    const handleDelete = async id => {
+    const handleDelete = async (id : number) => {
         // console.log(id)
         fetch(`${link}/${id}`, {
             method: "DELETE",
@@ -42,14 +57,14 @@ export default function Table({ employees }) {
         })
     }
     employeesData.map((key) => {
-        var index;
+        var index : number;
         index = key.name.toLowerCase().indexOf(valSearch);
         if (index !== -1) {
             arrKey.push(key)
         }
-        return arrKey
+        return arrKey;
     });
-    function confirm(id) {
+    function confirm(id : number) {
         message.info('Clicked on Yes.');
         handleDelete(id)
     }
@@ -138,3 +153,4 @@ export const getStaticProps = async () => {
         },
     };
 };
+export default Table;

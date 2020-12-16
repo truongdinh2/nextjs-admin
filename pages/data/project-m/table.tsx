@@ -1,9 +1,29 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, message, Popconfirm } from 'antd';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react';
 import Layout from '../../layout';
-import Diolog from './diolog'
-export default function Table({employees}) {
+import Diolog from './diolog';
+
+
+interface Props {
+    title: string,
+    employees: [
+        {Name: string,}
+    ],
+    checkEdit: boolean,
+    dataEdit: {
+      id: number,
+    },
+    valSearch: string,
+    text: string
+    // onChangeOpen : () => void,
+  }
+  interface Val{
+   user: {
+    //  id: number
+   }, 
+  }
+const Table : React.FC<Props> = ({employees}) => {
     const success = () => {
         message.success('deleted sucessfully');
     };
@@ -27,13 +47,13 @@ export default function Table({employees}) {
         setIsUpData(!isUpData);
         upDate();
     }
-    const sortData = ProjectData.sort(function (a, b) {
-        var x = a.Name.toLowerCase();
-        var y = b.Name.toLowerCase();
-        if (x < y) { return -1; }
-        if (x > y) { return 1; }
-        return 0;
-    });
+    // const sortData = ProjectData.sort(function (a, b) {
+    //     var x = a.Name.toLowerCase();
+    //     var y = b.Name.toLowerCase();
+    //     if (x < y) { return -1; }
+    //     if (x > y) { return 1; }
+    //     return 0;
+    // });
     const handleDelete = async id => {
         // console.log(id)
         fetch(` ${link}/${id}`, {
@@ -81,7 +101,7 @@ export default function Table({employees}) {
                     <tr>
                         <th><h1>STT</h1></th>
                         <th><h1
-                            style={{ cursor: 'pointer' }} onClick={() => { setProjectData(sortData); alert('da sap xep') }}
+                            // style={{ cursor: 'pointer' }} onClick={() => { setProjectData(sortData); alert('da sap xep') }}
                         >Name</h1></th>
                         <th><h1>Date begin</h1></th>
                         <th><h1>Time expected</h1></th>
@@ -133,3 +153,4 @@ export const getStaticProps = async () => {
         },
     };
 };
+export default Table;
