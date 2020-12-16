@@ -1,7 +1,6 @@
 
 import { Form, Input, InputNumber, Button, message } from 'antd';
 import { useEffect, useState } from 'react';
-// import { inflate } from 'zlib';
 
 const layout = {
   labelCol: { span: 8 },
@@ -55,29 +54,19 @@ const Diaolog: React.FC<Props> = (props) => {
     arrayEmail[ind] = '';
     return arrayEmail;
   })
-  console.log(arrayEmail)
-  console.log(checkEdit)
-  // console.log(employeeData[1].email)
-  // const [checkEdit1 ,setChechEdit] = useState(checkEdit)
+
   useEffect(() => {
     form.setFieldsValue(
       checkEdit === true ? { user: dataEdit } : '');
   });
-  // interface Values {
-  //   user : ar
-  // }
   const onFinish = async (values ) => {
-    // console.log(values.user.email)
     var index = true;
-    // if(idEdit) {
-    //   arrayEmail.
-    // }
+ 
     arrayEmail.map(email => {
       if (email.indexOf(values.user.email) !== -1) {
         return index = false;
       }
     })
-    // var index1 : boolean = true;
 
     if (index) {
       if (!dataEdit ) {
@@ -88,10 +77,6 @@ const Diaolog: React.FC<Props> = (props) => {
           },
           body: JSON.stringify(values.user),
         }).then( async () => {
-          // props.checkData();
-          // const reload = await fetch('https://5fbb65b4c09c200016d406f6.mockapi.io/employees')
-          // const employees = await reload.json();
-          // props.employees();
           success()
           props.onChangeOpen()
         });
@@ -105,7 +90,6 @@ const Diaolog: React.FC<Props> = (props) => {
           body: JSON.stringify(values.user),
         }
         ).then(() => {
-          // alert("hi")
           props.onChangeOpen()
           setDataEdit(null)
           success();
@@ -114,13 +98,11 @@ const Diaolog: React.FC<Props> = (props) => {
     } else {
       window.alert('email đã trùng lặp')
     }
-    // setDataEdit(null)
   };
 
   const success = () => {
     message.success('done !');
   };
-  // console.log(dataEdit,"hi")
   return (
     <div className="diolog">
 
@@ -146,7 +128,6 @@ const Diaolog: React.FC<Props> = (props) => {
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
           <Button type="primary" htmlType="submit" className="btn"
-          // onClick={() => { setChechEdit(false) }}
           >
             Submit
         </Button>
