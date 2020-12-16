@@ -18,7 +18,7 @@ const validateMessages = {
   },
 };
 
-const Diaolog = (props) => {
+const Diaolog = (props : any) => {
   const [dataEdit, setDataEdit] = useState(props.dataEdit);
   const [form] = Form.useForm();
   const checkEdit = props.checkEdit;
@@ -28,7 +28,7 @@ const Diaolog = (props) => {
 
       console.log()
   });
-  const onFinish = async values => {
+  const onFinish = async (values : any) => {
     console.log(values.user)
     if (!dataEdit) {
       fetch("https://5fbb65b4c09c200016d406f6.mockapi.io/Project", {
@@ -53,11 +53,11 @@ const Diaolog = (props) => {
       ).then(() => {
         // alert("hi")
         props.onChangeOpen()
-        setDataEdit(null)
+        // setDataEdit(null)
         success();
       })
     }
-    setDataEdit(null)
+    // setDataEdit(null)
   };
 
   const success = () => {

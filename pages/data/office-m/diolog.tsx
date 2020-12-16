@@ -19,7 +19,8 @@ const validateMessages = {
 };
 
 const Diaolog = (props) => {
-  const [dataEdit, setDataEdit] = useState(props.dataEdit);
+  // const [dataEdit, setDataEdit] = useState(props.dataEdit);
+  const dataEdit = props.dataEdit;
   const [form] = Form.useForm();
   const checkEdit = props.checkEdit;
   const link = process.env.FLOOR;
@@ -50,7 +51,7 @@ const Diaolog = (props) => {
       }
       ).then(() => {
         props.onChangeOpen()
-        setDataEdit(null)
+        // setDataEdit(null)
         success();
       })
     }

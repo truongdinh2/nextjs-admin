@@ -25,8 +25,8 @@ interface Props {
   // email: any
 }
 interface Values {
-user: object,
-email: string,
+  user: object,
+  email: string,
 }
 interface DataEdit {
   id: number
@@ -39,28 +39,30 @@ interface Data {
 const Diaolog: React.FC<Props> = (props) => {
   // console.log(props)
 
-  const [dataEdit, setDataEdit] = useState<DataEdit>(props.dataEdit);
+  const dataEdit : DataEdit = props.dataEdit
   const [form] = Form.useForm();
   const checkEdit = props.checkEdit;
   const [employeeData, setEmployeeData] = useState(props.employeesData);
   const arrayEmail = [];
-  const idEdit : any= dataEdit ? dataEdit.id : '';
-  employeeData.map((data : Data,index: number) => {
-    var ind : number;
-    if(idEdit === data.id) {
+  const idEdit: any = dataEdit ? dataEdit.id : '';
+  employeeData.map((data: Data, index: number) => {
+    var ind: number;
+    if (idEdit === data.id) {
       ind = index;
       arrayEmail.push(data.email);
       arrayEmail[ind] = 'abcbccb';
-    }{
+    } else {
       arrayEmail.push(data.email);
     }
+    console.log(arrayEmail)
     return arrayEmail;
   })
   useEffect(() => {
+    // setDataEdit()
     form.setFieldsValue(
       checkEdit === true ? { user: dataEdit } : '');
   });
-  const onFinish = async (values ) => {
+  const onFinish = async (values) => {
     var index = true;
     arrayEmail.map(email => {
       if (email.indexOf(values.user.email) !== -1) {
@@ -69,19 +71,19 @@ const Diaolog: React.FC<Props> = (props) => {
     })
 
     if (index) {
-      if (!dataEdit ) {
+      if (!dataEdit) {
         fetch("https://5fbb65b4c09c200016d406f6.mockapi.io/employees", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(values.user),
-        }).then( async () => {
+        }).then(async () => {
           success()
           props.onChangeOpen()
         });
       }
-      else if (dataEdit ) {
+      else if (dataEdit) {
         fetch(`https://5fbb65b4c09c200016d406f6.mockapi.io/employees/${dataEdit.id}`, {
           method: "PUT",
           headers: {
@@ -91,7 +93,7 @@ const Diaolog: React.FC<Props> = (props) => {
         }
         ).then(() => {
           props.onChangeOpen()
-          setDataEdit(null)
+          // setDataEdit(null)
           success();
         })
       }
