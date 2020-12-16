@@ -48,20 +48,20 @@ const Diaolog: React.FC<Props> = (props) => {
   employeeData.map((data : Data,index: number) => {
     var ind : number;
     if(idEdit === data.id) {
-      ind = index
+      ind = index;
+      arrayEmail.push(data.email);
+      arrayEmail[ind] = 'abcbccb';
+    }{
+      arrayEmail.push(data.email);
     }
-    arrayEmail.push(data.email);
-    arrayEmail[ind] = '';
     return arrayEmail;
   })
-
   useEffect(() => {
     form.setFieldsValue(
       checkEdit === true ? { user: dataEdit } : '');
   });
   const onFinish = async (values ) => {
     var index = true;
- 
     arrayEmail.map(email => {
       if (email.indexOf(values.user.email) !== -1) {
         return index = false;

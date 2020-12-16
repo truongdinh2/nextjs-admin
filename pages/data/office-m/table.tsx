@@ -57,7 +57,6 @@ export default function Table({ employees }) {
         message.info('Clicked on Yes.');
         handleDelete(id)
     }
-    console.log(employees)
     // console.log(link)
     return (
         <Layout title="office-manager">

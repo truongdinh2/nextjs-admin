@@ -54,7 +54,6 @@ export default function Table({ employees }) {
         handleDelete(id)
     }
 
-    console.log(employees)
     return (
         <Layout title="employees manager">
             <h1 className="title">Employees manager </h1>

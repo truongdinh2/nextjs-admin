@@ -3,7 +3,6 @@ import { Button, Col, Row } from 'antd';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
-// import '../styles/table.css';
 
 interface Props {
     title: string,
@@ -11,7 +10,6 @@ interface Props {
 const Layout: React.FC<Props> = ({ children , title = "create app by nextjs"} ) => {
     const [isMenu, setIsMenu] = useState<boolean>(false);
     const [theme, setTheme] = useState<string>('dark');
-    console.log(process.env.NAME);
 
     const switchTheme = (theme: string) => {
         if (theme === 'dark') {
@@ -22,7 +20,6 @@ const Layout: React.FC<Props> = ({ children , title = "create app by nextjs"} ) 
             document.documentElement.setAttribute("data-theme", "dark")
         }
     }
-    // const [title, setTitle] = useState<string>(props.title)
     return (
         <>
             <div className="total1">
