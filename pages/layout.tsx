@@ -67,7 +67,7 @@ const Layout: React.FC<Props> = ({ children , title = "create app by nextjs"} ) 
                                     Employee manager
                             </Link>
                             </div>
-                            <div className="navItem">
+                            <div className="navItem item4">
                                 <div onClick={() => switchTheme(theme)} style={{ cursor: "pointer" }}>
                                     {
                                         theme === 'dark' ?
@@ -81,7 +81,7 @@ const Layout: React.FC<Props> = ({ children , title = "create app by nextjs"} ) 
                             : ''}
                     </div>
                 </div>
-                <div className="container">
+                <div className="main">
                     {children}
                 </div>
                 <div className="footer">

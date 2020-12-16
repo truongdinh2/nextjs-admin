@@ -68,7 +68,9 @@ h2 a {
     padding: 0 0 20em 0;
     /* margin-bottom: 500px !important; */
 }
-
+table {
+    border-collapse: none !important;
+}
 .container td,
 .container th {
     padding-bottom: 2%;
@@ -148,5 +150,10 @@ h2 a {
     margin: auto;
     padding: 40px 0 30px 0;
     /* justify-content: center; */
+}
+@media screen and (min-width: 1200px) {
+    .title {
+        padding-top: 150px;
+    }
 }
 
