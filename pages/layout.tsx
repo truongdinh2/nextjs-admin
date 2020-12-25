@@ -1,16 +1,35 @@
 import React from 'react';
-import { Button, Col, Row } from 'antd';
+import { Button, Col, Row, Spin } from 'antd';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
+import { Router } from 'next/router';
 
 interface Props {
     title: string,
 }
-const Layout: React.FC<Props> = ({ children , title = "create app by nextjs"} ) => {
+const Layout: React.FC<Props> = ({ children, title = "create app by nextjs" }) => {
     const [isMenu, setIsMenu] = useState<boolean>(false);
     const [theme, setTheme] = useState<string>('dark');
-
+    const [loading, setLoading] = React.useState(false);
+    React.useEffect(() => {
+        const start = () => {
+            console.log("start");
+            setLoading(true);
+        };
+        const end = () => {
+            console.log("findished");
+            setLoading(false);
+        };
+        Router.events.on("routeChangeStart", start);
+        Router.events.on("routeChangeComplete", end);
+        Router.events.on("routeChangeError", end);
+        return () => {
+            Router.events.off("routeChangeStart", start);
+            Router.events.off("routeChangeComplete", end);
+            Router.events.off("routeChangeError", end);
+        };
+    }, []);
     const switchTheme = (theme: string) => {
         if (theme === 'dark') {
             setTheme('light')
@@ -51,18 +70,25 @@ const Layout: React.FC<Props> = ({ children , title = "create app by nextjs"} ) 
                         {isMenu ? <div >
                             <div className="navItem">
                                 <Link href="/data/office-m/table">
-                                    Office manager
-                            </Link>
+                                    <a>
+                                        Office manager
+                                       </a>
+                                </Link>
                             </div>
                             <div className="navItem">
                                 <Link href="/data/project-m/table">
-                                    Project manager
-                            </Link>
+                                    <a>
+                                        Project manager
+                                       </a>
+                                </Link>
                             </div>
                             <div className="navItem">
                                 <Link href="/data/employees-m/table">
-                                    Employee manager
-                            </Link>
+
+                                    <a>
+                                        Employee manager
+                                       </a>
+                                </Link>
                             </div>
                             <div className="navItem item4">
                                 <div onClick={() => switchTheme(theme)} style={{ cursor: "pointer" }}>
@@ -79,7 +105,13 @@ const Layout: React.FC<Props> = ({ children , title = "create app by nextjs"} ) 
                     </div>
                 </div>
                 <div className="main">
-                    {children}
+                    {loading ? (<>
+                        <a className="spin"><Spin /><p style={{ marginLeft: '-10px' }}>Loading...</p></a>
+
+                    </>
+                    ) :
+                        children
+                    }
                 </div>
                 <div className="footer">
                     <footer style={{ textAlign: 'center' }}>by: dinhtruong @ </footer>

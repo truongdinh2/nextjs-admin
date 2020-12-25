@@ -45,6 +45,9 @@ h2 a {
 .yellow {
     color: #FFF842;
 }
+tr{
+    color: white;
+}
 
 .container th h1 {
     font-weight: bold;
@@ -70,6 +73,7 @@ h2 a {
 }
 table {
     border-collapse: none !important;
+    width: 80% !important;
 }
 .container td,
 .container th {
@@ -105,17 +109,6 @@ table {
     box-shadow: 0 6px 6px -6px #0E1119;
 }
 
-.container td:hover {
-    background-color: #FFF842;
-    color: #403E10;
-    font-weight: bold;
-    box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px;
-    transform: translate3d(6px, -6px, 0);
-    transition-delay: 0s;
-    transition-duration: 0.4s;
-    transition-property: all;
-    transition-timing-function: line;
-}
 
 .button__add {
     background-color: red !important;

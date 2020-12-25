@@ -23,11 +23,10 @@ interface Props {
   },
   checkEdit: boolean,
   onChangeOpen: any,
-  employeesData: {},
-  // email: any
+  employeesData: [],
 }
 interface Values {
-  user: object,
+  user: { email: string },
   email: string,
 }
 interface DataEdit {
@@ -38,39 +37,43 @@ interface Data {
   email: string,
   id: number
 }
-const Diaolog: React.FC<Props> = (props) => {
-  const dataEdit : DataEdit = props.dataEdit
+const Diaolog: React.FC<Props> = (props : Props) => {
+  const dataEdit: DataEdit = props.dataEdit
   const [form] = Form.useForm();
   const checkEdit = props.checkEdit;
   const [employeeData, setEmployeeData] = useState(props.employeesData);
   const arrayEmail = [];
-  // const idEdit: any = dataEdit ? dataEdit.id : '';
-  // employeeData.map((data: Data, index: number) => {
-  //   var ind: number;
-  //   if (idEdit === data.id) {
-  //     ind = index;
-  //     arrayEmail.push(data.email);
-  //     arrayEmail[ind] = 'abcbccb';
-  //   } else {
-  //     arrayEmail.push(data.email);
-  //   }
-  //   console.log(arrayEmail)
-  //   return arrayEmail;
-  // })
+  const isArrayEmail = employeeData ? true : false;
+  const idEdit: any = dataEdit ? dataEdit.id : '';
+  useEffect(() => {
+    employeeData.map((data: Data, index: number) => {
+      var ind: number;
+      if (idEdit === data.id) {
+        ind = index;
+        arrayEmail.push(data.email);
+        arrayEmail[ind] = 'abcbccb';
+      } else {
+        arrayEmail.push(data.email);
+      }
+      console.log(arrayEmail)
+      return arrayEmail;
+    })
+  })
   useEffect(() => {
     // setDataEdit()
     form.setFieldsValue(
       checkEdit === true ? { user: dataEdit } : '');
   });
-  const onFinish = async (values) => {
-    // var index = true;
-    // arrayEmail.map(email => {
-    //   if (email.indexOf(values.user.email) !== -1) {
-    //     return index = false;
-    //   }
-    // })
-
-    // if (index) {
+  const onFinish = async (values: Values) => {
+    var index = true;
+    if (isArrayEmail) {
+      arrayEmail.map(email => {
+        if (email.indexOf(values.user.email) !== -1) {
+          return index = false;
+        }
+      })
+    }
+    if (index) {
       if (!dataEdit) {
         fetch("https://5fbb65b4c09c200016d406f6.mockapi.io/employees", {
           method: "POST",
@@ -97,9 +100,9 @@ const Diaolog: React.FC<Props> = (props) => {
           success();
         })
       }
-  //   } else {
-  //     window.alert('email đã trùng lặp')
-  //   }
+    } else {
+      window.alert('email đã trùng lặp')
+    }
   };
 
   const success = () => {
@@ -122,10 +125,10 @@ const Diaolog: React.FC<Props> = (props) => {
           label="Age" rules={[{ type: 'number', min: 0, max: 99 }, { required: true }]}>
           <InputNumber />
         </Form.Item>
-        <Form.Item name={['user', 'address']} label="position" rules={[{ required: true }]}>
+        <Form.Item name={['user', 'address']} label="address" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item name={['user', 'chuc_vu']} label="address" rules={[{ required: true }]}>
+        <Form.Item name={['user', 'chuc_vu']} label="position" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>

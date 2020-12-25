@@ -55,8 +55,15 @@ td a:first-child {
     font-size: 18px;
 }
 
-.icon:hover a {
+.icon a:hover {
     color: red !important;
+}
+.spin{
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    z-index: 12;
+    color: white;
 }
 /* .switch{
     background-color: coral;
@@ -78,6 +85,9 @@ td a:first-child {
     height: 40px;
     color: white;
     padding-top: 10px;
+}
+.navItem a:hover{
+    color: blue;
 }
 @media screen and (min-width: 1440px) {
 .total {

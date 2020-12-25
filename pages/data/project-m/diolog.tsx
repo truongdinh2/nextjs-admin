@@ -1,5 +1,5 @@
 
-import { Form, Input, InputNumber, Button, message } from 'antd';
+import { Form, Input, InputNumber, Button, message, Select } from 'antd';
 import { useEffect, useState } from 'react';
 
 const layout = {
@@ -20,32 +20,51 @@ const validateMessages = {
 
 interface Props {
   title: string,
-  employees: [
-      {name: string,}
-  ],
   checkEdit: boolean,
   dataEdit: {
     id: number,
   },
-  onChangeOpen : () => void,
+  onChangeOpen: () => void,
+  employees1: [{
+    id: number,
+    name: string,
+    email: string,
+    address: string,
+    chuc_vu: string,
+    Age: number
+  }],
 }
 // interface Val{
 //  user: {
 //   //  id: number
 //  }, 
 // }
-const Diaolog: React.FC<Props> = (props) => {
+const { Option }: any = Select;
+const Diaolog: React.FC<Props> = (props: Props) => {
   const dataEdit = props.dataEdit;
   const [form] = Form.useForm();
   const checkEdit = props.checkEdit;
+  const employees1 = props.employees1;
+  const [dataSelect, setDataSelect] = useState([]);
+  console.log(employees1)
+  useEffect(() => {
+    let dataS: string[] = [];
+    employees1.map((dataObj: any) => {
+      // console.log(dataObj.name) 
+      dataS.push(dataObj.name);
+    })
+    setDataSelect(dataS);
+    // console.log(dataSelect)
+
+  }, [])
   useEffect(() => {
     form.setFieldsValue(
       checkEdit === true ? { user: dataEdit } : '');
 
-    console.log()
+    // console.log()
   });
   const onFinish = async (values: any) => {
-    console.log(values.user)
+    // console.log(values.user)
     if (!dataEdit) {
       fetch("https://5fbb65b4c09c200016d406f6.mockapi.io/Project", {
         method: "POST",
@@ -81,11 +100,24 @@ const Diaolog: React.FC<Props> = (props) => {
       <Form {...layout} name="nest-messages" onFinish={onFinish}
         validateMessages={validateMessages}
         form={form}>
-        <Form.Item name={['user', 'Name']} extra label="Name" rules={[{ required: true }]}>
+        <Form.Item name={['user', 'Name']} label="Name" rules={[{ required: true }]}>
           <Input
           />
         </Form.Item>
-
+        <Form.Item name={['user', 'memberP']} label="Member" rules={[{ required: true }]}>
+          <Select
+            mode="multiple"
+            placeholder="choose name"
+          >
+            {dataSelect.map((data, index) => {
+              return (
+                <Option key={index} value={data}>
+                  {data}
+                </Option>
+              )
+            })}
+          </Select>
+        </Form.Item>
         <Form.Item name={['user', 'Date_begin']} label="Date begin" rules={[
           { required: true }]}>
           <Input type="date" />
@@ -94,9 +126,9 @@ const Diaolog: React.FC<Props> = (props) => {
           label="Time expected" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item name={['user', 'NumberPepole']} label="Number pepole"
+        <Form.Item name={['user', 'NumberPepole']} label="Leader"
           rules={[{ required: true }]}>
-          <InputNumber />
+          <Input />
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
           <Button type="primary" htmlType="submit" className="btn"
@@ -110,4 +142,9 @@ const Diaolog: React.FC<Props> = (props) => {
 
   );
 };
+// Diaolog.defaultProps = {
+//   employees1: [{
+//     // id: number,
+//   }],
+// }
 export default Diaolog;

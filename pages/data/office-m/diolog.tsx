@@ -1,6 +1,6 @@
 
-import { Button, Form, Input, message, Radio } from 'antd';
-import { useEffect } from 'react';
+import { Button, Form, Input, InputNumber, message, Radio, Select } from 'antd';
+import { useEffect, useState } from 'react';
 
 const layout = {
   labelCol: { span: 8 },
@@ -18,33 +18,56 @@ const validateMessages = {
   },
 };
 interface Props {
-  title: string,
-  employees: [
-      {name: string,}
-  ],
-  checkEdit: boolean,
   dataEdit: {
-    id: number,
+    id: number
   },
-  onChangeOpen : () => void,
+  checkEdit: boolean,
+  onChangeOpen: any,
+  employeesData: [],
+  name: [{ name: string }],
+  employees1: any
 }
-interface Val{
- user: {
-  //  id: number
- }, 
+interface Values {
+  user: { email: string },
+  email: string,
 }
-const Diaolog = (props: Props) => {
+interface DataEdit {
+  id: number
+
+}
+interface Data {
+  email: string,
+  id: number
+}
+const { Option }: any = Select;
+const Diaolog: React.FC<Props> = (props: Props) => {
   // const [dataEdit, setDataEdit] = useState(props.dataEdit);
-  const dataEdit = props.dataEdit;
+  const dataEdit: DataEdit = props.dataEdit;
   const [form] = Form.useForm();
   const checkEdit = props.checkEdit;
   const link = process.env.FLOOR;
+  const employees1 = props.employees1;
+  // const link1 = process.env.NAME;
+  // const {name} = props;
+  const [dataSelect, setDataSelect] = useState([]);
+  // console.log(employees1, 'nm')
+  useEffect(() => {
+    let dataS: string[] = [];
+    employees1.map((dataObj: any) => {
+      // console.log(dataObj.name) 
+      dataS.push(dataObj.name);
+    })
+    setDataSelect(dataS);
+
+  }, [])
+
   useEffect(() => {
     form.setFieldsValue(
       checkEdit === true ? { user: dataEdit } : '');
 
   });
-  const onFinish = async (values: Val) => {
+  
+  const onFinish = async (values: Values) => {
     if (!dataEdit) {
       fetch(link, {
         method: "POST",
@@ -76,6 +99,9 @@ const Diaolog = (props: Props) => {
   const success = () => {
     message.success('done !');
   };
+  // dataSelect.map(data=>{
+  //   // console.log(data)
+  // })
   return (
     <div className="diolog">
 
@@ -87,22 +113,33 @@ const Diaolog = (props: Props) => {
 
           />
         </Form.Item>
-        <Form.Item name={['user', 'Status']} label="Status">
-        <Radio.Group>
-          <Radio value={true}>empty</Radio>
-          <Radio value={false}>ordered</Radio>
-        </Radio.Group>
-      </Form.Item>
-        <Form.Item name={['user', 'Time_from']}
-          label="Time from"
-          rules={[{ required: true }]}>
-          <Input type="time"/>
+        <Form.Item
+          name={['user', 'Time_from']}
+          label="Số bàn "
+          rules={[{ required: true },{ type: 'number', min: 0, max: 99 }]}>
+          <InputNumber />
         </Form.Item>
-        <Form.Item name={['user', 'time_to']}
-          label="Time to"
+        <Form.Item
+          name={['user', 'time_to']}
+          label="DM"
           rules={[{ required: true }]}
         >
-          <Input type="time" />
+          <Input />
+        </Form.Item>
+        <Form.Item name={['user', 'member']} label="member"
+          rules={[{ required: true }]}>
+          <Select
+            mode="multiple"
+            placeholder="choose name"
+          >
+            {dataSelect.map((data, index) => {
+              return (
+                <Option key={index} value={data}>
+                  {data}
+                </Option>
+              )
+            })}
+          </Select>
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
           <Button type="primary" htmlType="submit" className="btn"
@@ -118,3 +155,5 @@ const Diaolog = (props: Props) => {
   );
 };
 export default Diaolog;
+
+// export default Table;

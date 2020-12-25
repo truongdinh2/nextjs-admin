@@ -2,23 +2,22 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, message, Popconfirm } from 'antd';
 import React, { useState } from 'react';
 import Layout from '../../layout';
+import PageTable from '../pageTable';
 import Diolog from './diolog';
-
-
-interface Props {
-    title: string,
-    employees: [
-        {name: string,}
-    ],
-    isUpData: boolean,
-    checkEdit: boolean,
-    dataEdit: {},
-    open: boolean,
-    text: string,
-    link: string,
-    onChangeOpen : () => void,
-}
-const Table : React.FC<Props> = ({ employees }) => {
+// interface Props {
+//     title: string,
+//     employees: [
+//         {name: string,}
+//     ],
+//     isUpData: boolean,
+//     checkEdit: boolean,
+//     dataEdit: {},
+//     open: boolean,
+//     text: string,
+//     link: string,
+//     onChangeOpen : () => void,
+// }
+const Table: React.FC = ({ employees }: any) => {
     const success = () => {
         message.success('deleted sucessfully');
     };
@@ -28,14 +27,14 @@ const Table : React.FC<Props> = ({ employees }) => {
     const [checkEdit, setCheckEdit] = useState(false);
     const [dataEdit, setDataEdit] = useState(null);
     const [open, setOpen] = useState(false);
-    const [employeesData, setEmployeesData] = React.useState(employees);
+    const [employeesData, setEmployeesData] = React.useState<any>(employees);
     const text = 'Are you sure to delete this task?';
     const link = process.env.NAME;
+    const [data1, setData1] = useState([])
     const upDate = async () => {
         const reload = await fetch(link)
         const employees = await reload.json();
         setEmployeesData(employees);
-
     }
     const onChangeOpen = () => {
         setOpen(false)
@@ -43,8 +42,7 @@ const Table : React.FC<Props> = ({ employees }) => {
         setIsUpData(!isUpData);
         upDate();
     }
-    const handleDelete = async (id : number) => {
-        // console.log(id)
+    const handleDelete = async (id: number) => {
         fetch(`${link}/${id}`, {
             method: "DELETE",
             headers: {
@@ -56,19 +54,20 @@ const Table : React.FC<Props> = ({ employees }) => {
             success();
         })
     }
-    employeesData.map((key) => {
-        var index : number;
+    employeesData.map((key: { name: string }) => {
+        var index: number;
         index = key.name.toLowerCase().indexOf(valSearch);
         if (index !== -1) {
             arrKey.push(key)
         }
         return arrKey;
     });
-    function confirm(id : number) {
-        message.info('Clicked on Yes.');
+    function confirm(id: number) {
         handleDelete(id)
     }
-
+    const dataRender = (data: any) => {
+        setData1(data)
+    }
     return (
         <Layout title="employees manager">
             <h1 className="title">Employees manager </h1>
@@ -80,11 +79,12 @@ const Table : React.FC<Props> = ({ employees }) => {
                     onClick={() => { setOpen(!open); setCheckEdit(false) }}
                 >
                     Add
-            </Button>
-
+                </Button>
             </div>
             {open && <div className="modal" onClick={() => setOpen(false)}></div>}
-            {open && <Diolog dataEdit={dataEdit} checkEdit={checkEdit}
+            {open && <Diolog
+                dataEdit={dataEdit}
+                checkEdit={checkEdit}
                 onChangeOpen={onChangeOpen}
                 employeesData={employeesData}
             />}
@@ -93,7 +93,6 @@ const Table : React.FC<Props> = ({ employees }) => {
                     <tr>
                         <th><h1>STT</h1></th>
                         <th><h1
-                        // style={{ cursor: 'pointer' }} onClick={() => { setEmployeesData(sortData); alert('da sap xep') }}
                         >Name</h1></th>
                         <th><h1>Email</h1></th>
                         <th><h1>Age</h1></th>
@@ -104,7 +103,7 @@ const Table : React.FC<Props> = ({ employees }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {arrKey.map((data, index) => {
+                    {data1.map((data, index) => {
                         return (
                             <tr key={data.id}>
                                 <td>{index + 1}</td>
@@ -119,7 +118,6 @@ const Table : React.FC<Props> = ({ employees }) => {
                                             setOpen(true);
                                             setDataEdit(data);
                                             setCheckEdit(true);
-                                            // setIdEdit(data.id)
                                         }}
                                     >
                                         <EditOutlined />
@@ -136,9 +134,13 @@ const Table : React.FC<Props> = ({ employees }) => {
                             </tr>
                         )
                     })}
-
                 </tbody>
             </table>
+            <PageTable
+                hi={employeesData}
+                dataNum={['hi']}
+                dataRender={dataRender}
+            />
             <div style={{ height: '80px', }}></div>
         </Layout>
     )
