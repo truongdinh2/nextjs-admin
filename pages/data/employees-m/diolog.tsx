@@ -55,7 +55,7 @@ const Diaolog: React.FC<Props> = (props : Props) => {
       } else {
         arrayEmail.push(data.email);
       }
-      console.log(arrayEmail)
+      // console.log(arrayEmail)
       return arrayEmail;
     })
   })

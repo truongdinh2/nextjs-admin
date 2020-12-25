@@ -6,7 +6,7 @@ interface Props {
     dataRender: any
 }
 const PageTable = (props: Props) => {
-    const dataNum = props.dataNum;
+    var dataNum = props.dataNum;
     const [pagePerNum, setPagePerNum] = useState<any>(3)
     const hi = props.hi;
     const hihi = hi.length;
@@ -19,24 +19,25 @@ const PageTable = (props: Props) => {
     const PageCrrDown: any = pageCurr - 1;
     useEffect(() => {
         props.dataRender(dataDisplay)
-    }, [pageCurr, pagePerNum])
+    }, [pageCurr, pagePerNum,hi])
 
     const handleSort = useCallback(
-        (a,b) => { var c= a+b;console.log(c+a);},
-        [],
+        // (a,b) => { var c= a+b;console.log(c+a);},
+        ()=>{ setPageCurr('1') },
+        []
     )
-    console.log('co render laij ko')
+    console.log('co render laij ko',dataNum)
     return (
         <>
             <div className="divPageNum">
                 <span className="sort">
-                    <button onClick={()=> handleSort(1, 3)}>
+                    <button onClick={handleSort}>
                         {/* {sortNotice} */}
                         hi
                     </button>
                 </span>
                 <span className="sort">
-                    <button onClick={()=> console.log('render?')}>
+                    <button onClick={()=> {return dataNum.push('hihi')}}>
                         {/* {sortNotice} */}
                         hi
                     </button>
