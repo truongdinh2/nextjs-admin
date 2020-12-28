@@ -23,7 +23,7 @@ const Table: React.FC<Props> = ({ employees, employees1 }: any) => {
     const success = () => {
         message.success('deleted sucessfully');
     };
-    const arrKey = [];
+    const [arrKey,setArrKey] = useState([]);
     const [valSearch, setValSearch] = useState('');
     const [isUpData, setIsUpData] = useState(false);
     const [checkEdit, setCheckEdit] = useState(false);
@@ -34,9 +34,20 @@ const Table: React.FC<Props> = ({ employees, employees1 }: any) => {
     const link = process.env.FLOOR;
     const text1 = <span>List</span>;
     const [content, setContent] = useState<any>('');
-    const [data1,setData1] = useState([])
-
-    // conslogole.(employees1)
+    const [data1, setData1] = useState([])
+    useEffect(() => {
+        var arrKey1 = [];
+        officeData.map((key: { Floor: string }) => {
+            var index: number;
+            index = key.Floor.indexOf(valSearch);
+            if (index !== -1) {
+                arrKey1.push(key)
+            }
+            return arrKey1;
+        }
+        );
+        setArrKey(arrKey1)
+    },[valSearch])
     const upDate = async () => {
         const reload = await fetch(link)
         const employees = await reload.json();
@@ -61,14 +72,6 @@ const Table: React.FC<Props> = ({ employees, employees1 }: any) => {
             success();
         })
     }
-    officeData.map((key) => {
-        var index: number;
-        index = key.Floor.indexOf(valSearch);
-        if (index !== -1) {
-            arrKey.push(key)
-        }
-        return arrKey
-    });
     function confirm(id: number) {
         handleDelete(id)
     }
@@ -82,22 +85,26 @@ const Table: React.FC<Props> = ({ employees, employees1 }: any) => {
                     // console.log(data.member)
                     result = data.member.map((data1: string) => {
                         // console.log(data1)
-                        return (<span style={{ marginLeft:'5px'}}>{data1},</span>);
+                        return (<span style={{ marginLeft: '5px' }}>{data1},</span>);
                     })
                 }
                 return result;
             })
         )
     }
-    const dataRender = (data:any) => {
+    const dataRender = (data: any) => {
         setData1(data)
     }
+    const handleSearch = (e: any) => {
+        setValSearch(e.target.value)
+    }
+    // console.log(arrKey)
     return (
         <Layout title="office-manager">
             <h1 className="title">Office manager </h1>
             <div className="button">
                 <input type="search" placeholder="search" className="search"
-                    onChange={(e) => { setValSearch(e.target.value); console.log(valSearch) }}
+                    onChange={handleSearch}
                 />
                 <Button className="button__add"
                     onClick={() => { setOpen(!open), setCheckEdit(false) }}
@@ -166,9 +173,9 @@ const Table: React.FC<Props> = ({ employees, employees1 }: any) => {
                 </tbody>
             </table>
             <PageTable
-            hi={officeData}
-            dataNum={['hi']}
-            dataRender={dataRender}
+                hi={arrKey}
+                dataNum={['hi']}
+                dataRender={dataRender}
             />
             <div style={{ height: '80px', }}></div>
         </Layout>

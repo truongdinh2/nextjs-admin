@@ -30,19 +30,6 @@ const PageTable = (props: Props) => {
     return (
         <>
             <div className="divPageNum">
-                <span className="sort">
-                    <button onClick={handleSort}>
-                        {/* {sortNotice} */}
-                        hi
-                    </button>
-                </span>
-                <span className="sort">
-                    <button onClick={()=> {return dataNum.push('hihi')}}>
-                        {/* {sortNotice} */}
-                        hi
-                    </button>
-                </span>
-                {/* {Number} */}
                 <span
                     className='allPage '
                 >

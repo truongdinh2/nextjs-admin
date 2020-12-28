@@ -1,6 +1,6 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, message, Popconfirm, Popover } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../../layout';
 import PageTable from '../pageTable';
 import Diolog from './diolog';
@@ -29,7 +29,7 @@ const Table = ({ employees, employees1 }) => {
     const success = () => {
         message.success('deleted sucessfully');
     };
-    const arrKey = [];
+    const [arrKey, setArrKey] = useState([]);
     const [valSearch, setValSearch] = useState('');
     const [isUpData, setIsUpData] = useState(false);
     const [checkEdit, setCheckEdit] = useState(false);
@@ -40,8 +40,20 @@ const Table = ({ employees, employees1 }) => {
     const link = process.env.PROJECT;
     const text1 = <span>List</span>;
     const [content, setContent] = useState<any>('')
-    const [data1,setData1] = useState([])
-
+    const [data1, setData1] = useState([])
+    useEffect(() => {
+        var arrKey1 = [];
+        ProjectData.map((key: { Name: string }) => {
+            var index: number;
+            index = key.Name.toLowerCase().indexOf(valSearch);
+            if (index !== -1) {
+                arrKey1.push(key)
+            }
+            return arrKey1;
+        }
+        );
+        setArrKey(arrKey1)
+    }, [valSearch])
     const upDate = async () => {
         const reload = await fetch(link)
         const employees = await reload.json();
@@ -65,14 +77,14 @@ const Table = ({ employees, employees1 }) => {
             upDate();
         })
     }
-    ProjectData.map((key) => {
-        var index: number;
-        index = key.Name.toLowerCase().indexOf(valSearch);
-        if (index !== -1) {
-            arrKey.push(key)
-        }
-        return arrKey
-    });
+    // ProjectData.map((key) => {
+    //     var index: number;
+    //     index = key.Name.toLowerCase().indexOf(valSearch);
+    //     if (index !== -1) {
+    //         arrKey.push(key)
+    //     }
+    //     return arrKey
+    // });
     function confirm(id: number) {
         handleDelete(id);
     }
@@ -89,7 +101,7 @@ const Table = ({ employees, employees1 }) => {
             })
         )
     }
-    const dataRender = (data:any) => {
+    const dataRender = (data: any) => {
         setData1(data)
     }
     return (
@@ -171,7 +183,7 @@ const Table = ({ employees, employees1 }) => {
                 </tbody>
             </table>
             <PageTable
-                hi={ProjectData}
+                hi={arrKey}
                 dataNum={['hi']}
                 dataRender={dataRender}
             />

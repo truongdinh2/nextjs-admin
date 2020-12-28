@@ -1,6 +1,6 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, message, Popconfirm } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../../layout';
 import PageTable from '../pageTable';
 import Diolog from './diolog';
@@ -21,7 +21,7 @@ const Table: React.FC = ({ employees }: any) => {
     const success = () => {
         message.success('deleted sucessfully');
     };
-    const arrKey = [];
+    const [arrKey, setArrKey] = useState([]);
     const [valSearch, setValSearch] = useState('');
     const [isUpData, setIsUpData] = useState(false);
     const [checkEdit, setCheckEdit] = useState(false);
@@ -30,7 +30,20 @@ const Table: React.FC = ({ employees }: any) => {
     const [employeesData, setEmployeesData] = React.useState<any>(employees);
     const text = 'Are you sure to delete this task?';
     const link = process.env.NAME;
-    const [data1, setData1] = useState([])
+    const [data1, setData1] = useState([]);
+    useEffect(() => {
+        var arrKey1 = [];
+        employeesData.map((key: { name: string }) => {
+            var index: number;
+            index = key.name.toLowerCase().indexOf(valSearch);
+            if (index !== -1) {
+                arrKey1.push(key)
+            }
+            return arrKey1;
+        }
+        );
+        setArrKey(arrKey1)
+    }, [valSearch])
     const upDate = async () => {
         const reload = await fetch(link)
         const employees = await reload.json();
@@ -54,14 +67,6 @@ const Table: React.FC = ({ employees }: any) => {
             success();
         })
     }
-    employeesData.map((key: { name: string }) => {
-        var index: number;
-        index = key.name.toLowerCase().indexOf(valSearch);
-        if (index !== -1) {
-            arrKey.push(key)
-        }
-        return arrKey;
-    });
     function confirm(id: number) {
         handleDelete(id)
     }
@@ -137,7 +142,7 @@ const Table: React.FC = ({ employees }: any) => {
                 </tbody>
             </table>
             <PageTable
-                hi={employeesData}
+                hi={arrKey}
                 dataNum={['hi']}
                 dataRender={dataRender}
             />
