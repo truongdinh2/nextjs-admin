@@ -3,12 +3,17 @@ import React, { useCallback, useEffect, useState } from 'react';
 interface Props {
     dataNum: any
     hi: any
-    dataRender: any
+    dataRender: any,
+    // test: any,
 }
 const PageTable = (props: Props) => {
+    // const test = props.test;
     var dataNum = props.dataNum;
-    const [pagePerNum, setPagePerNum] = useState<any>(3)
-    const hi = props.hi;
+    const [pagePerNum, setPagePerNum] = useState<any>(3);
+    const [hi,setHi] = useState([]);
+    useEffect(()=> {
+        setHi(props.hi)
+    })
     const hihi = hi.length;
     const pageNumAll = Math.ceil(hihi / pagePerNum);
     const [pageCurr, setPageCurr] = useState<any>('1');
@@ -20,12 +25,6 @@ const PageTable = (props: Props) => {
     useEffect(() => {
         props.dataRender(dataDisplay)
     }, [pageCurr, pagePerNum,hi])
-
-    const handleSort = useCallback(
-        ()=>{ setPageCurr('1') },
-        []
-    )
-    // console.log('co render laij ko',dataNum)
     return (
         <>
             <div className="divPageNum">
@@ -97,5 +96,4 @@ const PageTable = (props: Props) => {
         </>
     );
 }
-
 export default PageTable;

@@ -77,14 +77,6 @@ const Table = ({ employees, employees1 }) => {
             upDate();
         })
     }
-    // ProjectData.map((key) => {
-    //     var index: number;
-    //     index = key.Name.toLowerCase().indexOf(valSearch);
-    //     if (index !== -1) {
-    //         arrKey.push(key)
-    //     }
-    //     return arrKey
-    // });
     function confirm(id: number) {
         handleDelete(id);
     }
@@ -133,8 +125,6 @@ const Table = ({ employees, employees1 }) => {
                     <tr>
                         <th><h1>STT</h1></th>
                         <th><h1
-                        // onClick={()=> console.log('hi')}
-                        // style={{ cursor: 'pointer' }} onClick={() => { setProjectData(sortData); alert('da sap xep') }}
                         >Name</h1></th>
                         <th><h1>Member</h1></th>
                         <th><h1>Date begin</h1></th>
@@ -191,8 +181,7 @@ const Table = ({ employees, employees1 }) => {
         </Layout>
     )
 }
-
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
     const link = process.env.PROJECT;
     const res = await fetch(link)
     const employees = await res.json();
@@ -206,5 +195,4 @@ export const getStaticProps = async () => {
         },
     };
 };
-
 export default Table;
