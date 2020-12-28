@@ -115,7 +115,7 @@ const Diaolog: React.FC<Props> = (props: Props) => {
         </Form.Item>
         <Form.Item
           name={['user', 'Time_from']}
-          label="Số bàn "
+          label="Số bàn trống"
           rules={[{ required: true },{ type: 'number', min: 0, max: 99 }]}>
           <InputNumber />
         </Form.Item>

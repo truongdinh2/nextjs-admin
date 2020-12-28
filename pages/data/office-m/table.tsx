@@ -128,7 +128,7 @@ const Table: React.FC<Props> = ({ employees, employees1 }: any) => {
                         //  style={{ cursor: 'pointer' }} onClick={() => { setOfficeData(sortData); alert('da sap xep') }}
                         >Floor</h1></th>
                         <th><h1>Member</h1></th>
-                        <th><h1>Số bàn</h1></th>
+                        <th><h1>Số bàn trống</h1></th>
                         <th><h1>DM</h1></th>
                         <th><h1>Edit</h1></th>
                         <th><h1>Detele</h1></th>
