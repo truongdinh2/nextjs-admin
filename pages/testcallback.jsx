@@ -9,7 +9,7 @@ export default function Testcallback() {
     const getItem = useCallback(() => {
         return [Number, Number + 1, Number + 2]
     }, [Number])
-    console.log(getItem(),text)
+    // console.log(getItem(),text)
     return (
         <Layout>
             <div style={{ color: "black" }}>

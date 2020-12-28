@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 
 export default function List({getItem}) {
     const [list, setList] = useState([]);
-    console.log(getItem(5),'hi')
+    // console.log(getItem(5),'hi')
     useEffect(() => {
       setList(getItem());
-      console.log('update items')
+    //   console.log('update items')
     }, [getItem])
     return (
         <ul>

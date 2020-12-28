@@ -14,11 +14,11 @@ const Layout: React.FC<Props> = ({ children, title = "create app by nextjs" }) =
     const [loading, setLoading] = React.useState(false);
     React.useEffect(() => {
         const start = () => {
-            console.log("start");
+            // console.log("start");
             setLoading(true);
         };
         const end = () => {
-            console.log("findished");
+            // console.log("findished");
             setLoading(false);
         };
         Router.events.on("routeChangeStart", start);

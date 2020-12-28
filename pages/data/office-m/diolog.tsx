@@ -44,14 +44,10 @@ const Diaolog: React.FC<Props> = (props: Props) => {
   const checkEdit = props.checkEdit;
   const link = process.env.FLOOR;
   const employees1 = props.employees1;
-  // const link1 = process.env.NAME;
-  // const {name} = props;
   const [dataSelect, setDataSelect] = useState([]);
-  // console.log(employees1, 'nm')
   useEffect(() => {
     let dataS: string[] = [];
     employees1.map((dataObj: any) => {
-      // console.log(dataObj.name) 
       dataS.push(dataObj.name);
     })
     setDataSelect(dataS);
@@ -86,19 +82,15 @@ const Diaolog: React.FC<Props> = (props: Props) => {
       }
       ).then(() => {
         props.onChangeOpen()
-        // setDataEdit(null)
         success();
       })
     }
-    // setDataEdit(null)
   };
 
   const success = () => {
     message.success('done !');
   };
-  // dataSelect.map(data=>{
-  //   // console.log(data)
-  // })
+
   return (
     <div className="diolog">
 

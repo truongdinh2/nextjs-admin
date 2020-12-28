@@ -21,7 +21,6 @@ interface Props {
 interface DataEdit {
     id: number
 }
-
 const Table: React.FC<Props> = ({ employees, employees1 }: any) => {
     const success = () => {
         message.success('deleted sucessfully');
@@ -55,9 +54,7 @@ const Table: React.FC<Props> = ({ employees, employees1 }: any) => {
         const reload = await fetch(link)
         const employees = await reload.json();
         setOfficeData(employees);
-
     }
-
     const onChangeOpen = () => {
         setOpen(false)
         setDataEdit(null);
@@ -78,16 +75,12 @@ const Table: React.FC<Props> = ({ employees, employees1 }: any) => {
     function confirm(id: number) {
         handleDelete(id)
     }
-    // console.log(link)
     const handlePover = (num: number) => {
-        console.log(arrKey)
         setContent(
             arrKey.map(data => {
                 var result = '';
                 if (data.id === num) {
-                    // console.log(data.member)
                     result = data.member.map((data1: string) => {
-                        // console.log(data1)
                         return (<span style={{ marginLeft: '5px' }}>{data1},</span>);
                     })
                 }
@@ -101,7 +94,6 @@ const Table: React.FC<Props> = ({ employees, employees1 }: any) => {
     const handleSearch = (e: any) => {
         setValSearch(e.target.value)
     }
-    // console.log(arrKey)
     return (
         <Layout title="office-manager">
             <h1 className="title">Office manager </h1>

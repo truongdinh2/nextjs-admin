@@ -22,11 +22,10 @@ const PageTable = (props: Props) => {
     }, [pageCurr, pagePerNum,hi])
 
     const handleSort = useCallback(
-        // (a,b) => { var c= a+b;console.log(c+a);},
         ()=>{ setPageCurr('1') },
         []
     )
-    console.log('co render laij ko',dataNum)
+    // console.log('co render laij ko',dataNum)
     return (
         <>
             <div className="divPageNum">
