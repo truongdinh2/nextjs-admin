@@ -18,6 +18,9 @@ interface Props {
     link: string,
     onChangeOpen: () => void,
 }
+interface DataEdit {
+    id: number
+}
 
 const Table: React.FC<Props> = ({ employees, employees1 }: any) => {
     const success = () => {
@@ -27,7 +30,7 @@ const Table: React.FC<Props> = ({ employees, employees1 }: any) => {
     const [valSearch, setValSearch] = useState('');
     const [isUpData, setIsUpData] = useState(false);
     const [checkEdit, setCheckEdit] = useState(false);
-    const [dataEdit, setDataEdit] = useState<object>(null);
+    const [dataEdit, setDataEdit] = useState<DataEdit>(null);
     const [open, setOpen] = useState(false);
     const text = 'Are you sure to delete this task?';
     const [officeData, setOfficeData] = useState(employees);
@@ -115,6 +118,7 @@ const Table: React.FC<Props> = ({ employees, employees1 }: any) => {
             </div>
             {open && <div className="modal" onClick={() => setOpen(false)}></div>}
             {open && <Diaolog
+            
                 dataEdit={dataEdit}
                 employees1={employees1}
                 checkEdit={checkEdit}

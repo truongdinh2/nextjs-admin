@@ -20,11 +20,9 @@ const validateMessages = {
 interface Props {
   dataEdit: {
     id: number
-  },
+  }
   checkEdit: boolean,
   onChangeOpen: any,
-  employeesData: [],
-  name: [{ name: string }],
   employees1: any
 }
 interface Values {
@@ -41,8 +39,7 @@ interface Data {
 }
 const { Option }: any = Select;
 const Diaolog: React.FC<Props> = (props: Props) => {
-  // const [dataEdit, setDataEdit] = useState(props.dataEdit);
-  const dataEdit: DataEdit = props.dataEdit;
+  const dataEdit = props.dataEdit;
   const [form] = Form.useForm();
   const checkEdit = props.checkEdit;
   const link = process.env.FLOOR;
