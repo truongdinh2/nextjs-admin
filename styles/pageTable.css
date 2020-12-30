@@ -4,7 +4,6 @@
     font-size: 16px;
     color: black;
 }
-
 .divPageNum span input:disabled {
     cursor: not-allowed;
 }
@@ -16,23 +15,20 @@
     justify-content: flex-end;
     margin: auto;
     background-color: white;
-    margin-bottom: 100px;
+    align-items: center;
+    height: 8ex;
 }
 
 .pageNum {
     margin: 0.3% 1%;
     padding: 0.5% 1.3%;
     font-size: 16px;
-    border-radius: 50%;
-}
-.divPageNum .sort{
-    flex-grow: 6;
-    /* flex-shrink: 3; */
-    
+    border-radius: 60%;
+    border: 2px solid transparent;
+    height:70%;
 }
 .pageNum:hover {
     color: red;
-    font-size: 18px;
     font-weight: 500;
     background-color: wheat;
     border: 2px dotted pink;

@@ -78,7 +78,7 @@ td a:first-child {
     width: 100px;
 }
 .main {
-    min-height: 100vh;
+    min-height: 95.7vh;
 }
 .footer {
     background-color: #333333;
@@ -89,6 +89,38 @@ td a:first-child {
 .navItem a:hover{
     color: blue;
 }
+.ani{
+    border: 1px solid blue;
+    background-color: var(--color-suki);
+    width: 150px;
+    height: 150px;
+    margin: 10px auto;
+}
+.box{
+    box-sizing: content-box;
+    width: 150px;
+    height: auto;
+    padding: 50px;
+    margin: 10px auto;
+    border: 1px solid white;
+}
+.div {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: relative;
+    animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count: 3;
+  }
+  
+  @keyframes example {
+    0%   {background-color:red; left:0px; top:0px;}
+    25%  {background-color:yellow; left:200px; top:0px;}
+    50%  {background-color:blue; left:200px; top:200px;}
+    75%  {background-color:green; left:0px; top:200px;}
+    100% {background-color:red; left:0px; top:0px;}
+  }
 @media screen and (min-width: 1440px) {
 .total {
     width: 280px;
@@ -108,3 +140,8 @@ td a:first-child {
     padding-top: 300px;
 }
 }
+
+
+
+
+

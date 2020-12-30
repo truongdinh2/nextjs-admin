@@ -1,6 +1,6 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, message, Popconfirm } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Layout from '../../layout';
 import PageTable from '../pageTable';
 import Diolog from './diolog';
@@ -29,7 +29,7 @@ const Table: React.FC = ({ employees }: any) => {
     const [open, setOpen] = useState(false);
     const [employeesData, setEmployeesData] = React.useState<any>(employees);
     const text = 'Are you sure to delete this task?';
-    const link = process.env.NAME;
+    const link =useMemo(()=> process.env.NAME,[]);
     const [data1, setData1] = useState([]);
     useEffect(() => {
         var arrKey1 = [];
@@ -43,7 +43,7 @@ const Table: React.FC = ({ employees }: any) => {
         }
         );
         setArrKey(arrKey1)
-    }, [valSearch])
+    }, [valSearch,employeesData])
     const upDate = async () => {
         const reload = await fetch(link)
         const employees = await reload.json();

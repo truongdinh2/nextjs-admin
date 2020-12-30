@@ -53,7 +53,7 @@ const Table = ({ employees, employees1 }) => {
         }
         );
         setArrKey(arrKey1)
-    }, [valSearch])
+    }, [valSearch,ProjectData])
     const upDate = async () => {
         const reload = await fetch(link)
         const employees = await reload.json();

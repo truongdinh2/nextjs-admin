@@ -49,7 +49,7 @@ const Table: React.FC<Props> = ({ employees, employees1 }: any) => {
         }
         );
         setArrKey(arrKey1)
-    },[valSearch])
+    },[valSearch,officeData])
     const upDate = async () => {
         const reload = await fetch(link)
         const employees = await reload.json();

@@ -1,6 +1,6 @@
 :root {
     --font-text: "Lucida Bright", "DejaVu Serif", Georgia, "serif";
-    --background-bar:linear-gradient(90deg, rgba(151,146,235,1) 0%, rgba(102,171,138,1) 30%, rgba(107,49,92,1) 81%, rgba(184,222,159,1) 100%);
+    --background-bar: linear-gradient(90deg, rgba(174,170,241,1) 0%, rgba(110,235,175,1) 38%, rgba(166,177,166,1) 74%, rgba(184,222,159,1) 100%);
     --background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
     --background-dark-mode:linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,208,255,1) 0%, rgba(66,198,195,1) 0%, rgba(202,223,230,1) 0%, rgba(181,214,222,1) 100%, rgba(182,214,230,1) 100%);
     --text-color-dark-title: black;
@@ -11,6 +11,7 @@
     --text-color-table:white;
     --background-th: #1F2739;
     --color-bar:black;
+    --color-suki: #C51162
 }
 [data-theme = "light"] {
     --background-dark-mode: linear-gradient(90deg, rgba(75, 7, 59, 1) 0%, rgba(44, 75, 93, 1) 100%);
@@ -18,7 +19,7 @@
     --background-bar: linear-gradient(189deg, rgba(12, 124, 106, 1) 0%, rgba(86, 9, 121, 1) 61%);
     --background: linear-gradient(90deg, rgb(117, 34, 98) 0%, rgba(44, 75, 93, 1) 100%);
     --back-ground-bar: #46A049;
-    --background-blue-light: #89CFF0;
+    --background-blue-light: #062b3b;
     /* --background-td: #a9b9da; */
     --text-color-dark-title: #b3c5cd;
     --text-color-table:#A7A1AE;

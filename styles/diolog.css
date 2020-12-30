@@ -1,7 +1,7 @@
 .diolog {
     box-shadow: 0 10px 8px 0 rgba(7, 38, 78, 0.171), 1px 6px 20px 0 rgba(163, 16, 97, 0.19);
-    padding: 40px;
-    height: 400px;
+    padding: 40px 0 20px 0;
+    min-height: 350px;
     position: absolute;
     padding-right: 110px;
     margin: auto;
@@ -14,8 +14,8 @@
 }
 .diologPro {
     box-shadow: 0 10px 8px 0 rgba(7, 38, 78, 0.171), 1px 6px 20px 0 rgba(163, 16, 97, 0.19);
-    padding: 50px;
-    max-height: 400px;
+    padding: 50px 0 20px;
+    min-height: 350px;
     position: absolute;
     padding-right: 10px;
     margin: auto;
@@ -34,7 +34,6 @@
 }
 @media screen and (min-width: 1550px) {
     .diolog {
-        padding: 40px;
         min-height: 360px;
         position: absolute;
         padding-right: 30px;
@@ -50,6 +49,10 @@
     }
     .total{
         width: 200px;
+    }
+    .btn {
+        margin-left: 16.5%;
+        margin-top: 10px;
     }
 }
 @media screen and (max-width: 1100px) {
