@@ -4,10 +4,8 @@ interface Props {
     dataNum: any
     hi: any
     dataRender: any,
-    // test: any,
 }
 const PageTable = (props: Props) => {
-    // const test = props.test;
     var dataNum = props.dataNum;
     const [pagePerNum, setPagePerNum] = useState<any>(3);
     const [hi,setHi] = useState([]);
